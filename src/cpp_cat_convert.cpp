@@ -3,7 +3,7 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-arma::mat cat_convert(const arma::vec& xt) {
+arma::mat cpp_cat_convert(const arma::vec& xt) {
   arma::vec stage = arma::sort(arma::unique(xt));
   int nobs = xt.n_elem;
   int n_stage = stage.n_elem - 1;
