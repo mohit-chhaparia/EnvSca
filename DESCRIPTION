@@ -2,8 +2,10 @@ Package: EnvSca
 Title: Classification of Categorical Time Series
 Version: 0.0.0.9000
 Authors@R: 
-    person("Mohit", "Chhaparia", , "mohit_chhaparia@tamu.edu", role = c("cre"),
-           comment = c(ORCID = "0009-0006-9810-7931"))
+    c(person("Mohit", "Chhaparia", , "mohit_chhaparia@tamu.edu", role = c("cre", "aut")), 
+    person("Zeda", "Li", role = "aut"),
+    person("Scott", "Bruce", , "sabruce@tamu.edu", role = "aut"),
+    person("Tian", "Cai", role = "aut"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Encoding: UTF-8
