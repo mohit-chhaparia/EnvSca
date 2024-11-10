@@ -23,6 +23,10 @@ Rcpp::List env.get_c(const arma::mat& yt, Rcpp::List fyy) {
   arma::vec specenv(nfreq, arma::fill::zeros); // Initialize spectral envelope with zeros
   arma::mat beta(nfreq, dimen, arma::fill::zeros); // Initialize beta matrix with zeros
 
+  for (int k = 0; k < nfreq; k++) {
+
+  }
+
   return Rcpp::List::create(Rcpp::Named("freq") = freq,
                             Rcpp::Named("envelope") = specenv,
                             Rcpp::Named("scale") = beta);
