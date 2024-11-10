@@ -20,6 +20,9 @@ Rcpp::List env.get_c(const arma::mat& yt, Rcpp::List fyy) {
   arma::mat Q = arma::eye(dimen, dimen); // Identity matrix of size dimen
   int nfreq = freq.n_elem; // Number of elements in freq
 
+  arma::vec specenv(nfreq, arma::fill::zeros); // Initialize spectral envelope with zeros
+  arma::mat beta(nfreq, dimen, arma::fill::zeros); // Initialize beta matrix with zeros
+
   return Rcpp::List::create(Rcpp::Named("freq") = freq,
                             Rcpp::Named("envelope") = specenv,
                             Rcpp::Named("scale") = beta);
