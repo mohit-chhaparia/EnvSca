@@ -9,8 +9,11 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-Rcpp::List group_env_c(const arma::mat& yt_group, int L) {
+Rcpp::List group_env_c(const arma::cube& yt_group, int L) {
 
+  int nsub = yt_group.n_slices;
+  arma::vec specenv;
+  double beta = 0.0;
 
   return Rcpp::List::create(Rcpp::Named("freq") = freq,
                             Rcpp::Named("envelope") = specenv,
