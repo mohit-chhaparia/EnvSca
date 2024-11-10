@@ -9,6 +9,8 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 Rcpp::List env.get_c(const arma::mat& yt, Rcpp::List fyy) {
+  int dimen = yt.n_cols;
+  arma::mat v = arma::cov(yt);
 
   return Rcpp::List::create(Rcpp::Named("freq") = freq,
                             Rcpp::Named("envelope") = specenv,
