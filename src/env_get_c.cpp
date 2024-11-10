@@ -8,7 +8,7 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-Rcpp::List env.get_c(const arma::mat& yt, Rcpp::List fyy) {
+Rcpp::List env_get_c(const arma::mat& yt, Rcpp::List fyy) {
 
   int dimen = yt.n_cols; // Number of columns (dimensions)
   arma::mat v = arma::cov(yt); // Covariance matrix
