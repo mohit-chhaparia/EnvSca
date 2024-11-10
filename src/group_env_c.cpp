@@ -15,6 +15,10 @@ Rcpp::List group_env_c(const arma::cube& yt_group, int L) {
   arma::vec specenv;
   double beta = 0.0;
 
+  for (int k = 0; k < nsub; k++) {
+
+  }
+
   return Rcpp::List::create(Rcpp::Named("freq") = freq,
                             Rcpp::Named("envelope") = specenv,
                             Rcpp::Named("scale") = beta);
