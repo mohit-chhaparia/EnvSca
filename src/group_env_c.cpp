@@ -23,6 +23,10 @@ Rcpp::List group_env_c(const arma::cube& yt_group, int L) {
     if (k == 0) {
       specenv = arma::vec(tmp_env.n_elem, arma::fill::zeros);
     }
+
+    specenv += tmp_env / static_cast<double>(nsub);
+    beta += output["scale"] / static_cast<double>(nsub);
+
   }
 
   arma::vec freq = output["freq"];
