@@ -7,5 +7,5 @@
 #' To be added later
 #' @export
 cat_convert <- function(xt){
-  .Call(`_EnvSca_cpp_cat_convert`, xt)
+  .Call(`_EnvSca_cat_convert_c`, xt)
 }
