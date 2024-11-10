@@ -18,5 +18,9 @@ Imports:
     Rcpp
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat (>= 3.0.0),
+    microbenchmark,
+    astsa,
+    abind
 VignetteBuilder: knitr
