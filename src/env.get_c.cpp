@@ -24,7 +24,12 @@ Rcpp::List env.get_c(const arma::mat& yt, Rcpp::List fyy) {
   arma::mat beta(nfreq, dimen, arma::fill::zeros); // Initialize beta matrix with zeros
 
   for (int k = 0; k < nfreq; k++) {
+    arma::mat mat_to_eigen = 2.0 * Q * fyy_re.slice(k) * Q / static_cast<double>(num);
+    mat_to_eigen = 0.5 * (mat_to_eigen + mat_to_eigen.t());
 
+    arma::vec eigval;
+    arma::mat eigvec;
+    arma::eig_sym(eigval, eigvec, mat_to_eigen); // Eigenvalue and eigenvector calculation
   }
 
   return Rcpp::List::create(Rcpp::Named("freq") = freq,
