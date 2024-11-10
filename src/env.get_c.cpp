@@ -17,6 +17,9 @@ Rcpp::List env.get_c(const arma::mat& yt, Rcpp::List fyy) {
   arma::vec freq = Rcpp::as<arma::vec>(fyy["freq"]); // Frequencies
   int num = Rcpp::as<int>(fyy["n.used"]); // Number of observations used
 
+  arma::mat Q = arma::eye(dimen, dimen); // Identity matrix of size dimen
+  int nfreq = freq.n_elem; // Number of elements in freq
+
   return Rcpp::List::create(Rcpp::Named("freq") = freq,
                             Rcpp::Named("envelope") = specenv,
                             Rcpp::Named("scale") = beta);
