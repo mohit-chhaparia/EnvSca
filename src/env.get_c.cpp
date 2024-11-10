@@ -9,6 +9,7 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 Rcpp::List env.get_c(const arma::mat& yt, Rcpp::List fyy) {
+
   int dimen = yt.n_cols; // Number of columns (dimensions)
   arma::mat v = arma::cov(yt); // Covariance matrix
 
@@ -30,6 +31,10 @@ Rcpp::List env.get_c(const arma::mat& yt, Rcpp::List fyy) {
     arma::vec eigval;
     arma::mat eigvec;
     arma::eig_sym(eigval, eigvec, mat_to_eigen); // Eigenvalue and eigenvector calculation
+
+    specenv(k) = eigval(dimen - 1); // Largest eigenvalue sorted in ascending order
+    arma::vec b = Q * eigvec.col(dimen - 1); // Corresponding eigenvector
+    beta.row(k) = arma::trans(b / std::sqrt(arma::accu(arma::square(b))));
   }
 
   return Rcpp::List::create(Rcpp::Named("freq") = freq,
