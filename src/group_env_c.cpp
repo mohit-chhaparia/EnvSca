@@ -1,3 +1,9 @@
+//'
+//' Given a several time series within a group
+//' Compute
+//' (1) the group level spectral envelope
+//' (2) the group level optimal scaling
+//'
 #include <RcppArmadillo.h>
 // [[Rcpp::depends(RcppArmadillo)]]
 using namespace Rcpp;
