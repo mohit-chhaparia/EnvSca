@@ -35,13 +35,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // group_env_c
-Rcpp::List group_env_c(const arma::cube& yt_group, int L);
+Rcpp::List group_env_c(const arma::cube& yt_group, const arma::vec& L);
 RcppExport SEXP _EnvSca_group_env_c(SEXP yt_groupSEXP, SEXP LSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::cube& >::type yt_group(yt_groupSEXP);
-    Rcpp::traits::input_parameter< int >::type L(LSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type L(LSEXP);
     rcpp_result_gen = Rcpp::wrap(group_env_c(yt_group, L));
     return rcpp_result_gen;
 END_RCPP
