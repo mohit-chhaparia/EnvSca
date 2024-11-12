@@ -17,4 +17,11 @@ test_that("Test 3: cat_convert handles empty input", {
   expect_error(cat_convert(xt))
 })
 
-
+test_that("Test 4: cat_convert works with non-integer categories", {
+  xt <- c(1.1, 2.2, 1.1, 3.3)
+  expect_equal(cat_convert(xt), matrix(c(1, 0, 1, 0,
+                                         0, 1, 0, 0),
+                                       nrow = 4, byrow = FALSE
+  )
+  )
+})
