@@ -26,7 +26,7 @@ Rcpp::List group_env_c(const arma::cube& yt_group, int L) {
     }
 
     specenv += tmp_env / static_cast<double>(nsub);
-    beta += 1.0 * output["scale"] / static_cast<double>(nsub);
+    beta += Rcpp::as<double>(output["scale"]) / static_cast<double>(nsub);
 
   }
 
