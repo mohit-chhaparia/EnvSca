@@ -11,20 +11,46 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// cpp_cat_convert
-arma::mat cpp_cat_convert(const arma::vec& xt);
-RcppExport SEXP _EnvSca_cpp_cat_convert(SEXP xtSEXP) {
+// cat_convert_c
+arma::mat cat_convert_c(const arma::vec& xt);
+RcppExport SEXP _EnvSca_cat_convert_c(SEXP xtSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::vec& >::type xt(xtSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_cat_convert(xt));
+    rcpp_result_gen = Rcpp::wrap(cat_convert_c(xt));
+    return rcpp_result_gen;
+END_RCPP
+}
+// env_get_c
+Rcpp::List env_get_c(const arma::mat& yt, Rcpp::List fyy);
+RcppExport SEXP _EnvSca_env_get_c(SEXP ytSEXP, SEXP fyySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type yt(ytSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type fyy(fyySEXP);
+    rcpp_result_gen = Rcpp::wrap(env_get_c(yt, fyy));
+    return rcpp_result_gen;
+END_RCPP
+}
+// group_env_c
+Rcpp::List group_env_c(const arma::cube& yt_group, int L);
+RcppExport SEXP _EnvSca_group_env_c(SEXP yt_groupSEXP, SEXP LSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::cube& >::type yt_group(yt_groupSEXP);
+    Rcpp::traits::input_parameter< int >::type L(LSEXP);
+    rcpp_result_gen = Rcpp::wrap(group_env_c(yt_group, L));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_EnvSca_cpp_cat_convert", (DL_FUNC) &_EnvSca_cpp_cat_convert, 1},
+    {"_EnvSca_cat_convert_c", (DL_FUNC) &_EnvSca_cat_convert_c, 1},
+    {"_EnvSca_env_get_c", (DL_FUNC) &_EnvSca_env_get_c, 2},
+    {"_EnvSca_group_env_c", (DL_FUNC) &_EnvSca_group_env_c, 2},
     {NULL, NULL, 0}
 };
 
