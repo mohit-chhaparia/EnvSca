@@ -1,8 +1,8 @@
 #'
 #' Convert a categorical time-series into multivariate indicator process
 #'
-#' @param xt
-#' @return
+#' @param xt DESCRIPTION
+#' @return DESCRIPTION
 #' @examples
 #' To be added later
 #' @export

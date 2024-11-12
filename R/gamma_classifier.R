@@ -1,10 +1,10 @@
 #'
 #' Classification using ONLY spectral envelope
 #'
-#' @param yt
-#' @param group
-#' @param L
-#' @param yt_new
+#' @param yt DESCRIPTION
+#' @param group DESCRIPTION
+#' @param L DESCRIPTION
+#' @param yt_new DESCRIPTION
 #' @return classes
 #' @examples
 #' To be added later

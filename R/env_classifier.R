@@ -1,11 +1,11 @@
 #'
 #' This is the main function: It assigns classes to a time series
 #'
-#' @param yt
-#' @param group
-#' @param L
-#' @param yt_new
-#' @param kappa
+#' @param yt DESCRIPTION
+#' @param group DESCRIPTION
+#' @param L DESCRIPTION
+#' @param yt_new DESCRIPTION
+#' @param kappa DESCRIPTION
 #' @return classes
 #' @examples
 #' To be added later

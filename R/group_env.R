@@ -4,9 +4,9 @@
 #' (1) the group level spectral envelope
 #' (2) the group level optimal scaling
 #'
-#' @param yt_group
-#' @param L
-#' @return
+#' @param yt_group DESCRIPTION
+#' @param L DESCRIPTION
+#' @return DESCRIPTION
 #' @examples
 #' To be added later
 #' @export

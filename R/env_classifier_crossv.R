@@ -1,10 +1,10 @@
 #'
 #' Cross-validation to do grid search of kappa
 #'
-#' @param yt
-#' @param group
-#' @param L
-#' @param kappa
+#' @param yt DESCRIPTION
+#' @param group DESCRIPTION
+#' @param L DESCRIPTION
+#' @param kappa DESCRIPTION
 #' @return classes
 #' @examples
 #' To be added later
