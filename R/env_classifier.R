@@ -29,11 +29,11 @@ env_classifier <- function(yt, group, L, yt_new, kappa){
   # for each of testing time series, assign a group to it
   for (k in 1:nnew){
     if(nnew == 1){
-      new_env <- env.get(yt_new , L)$envelope
-      new_scal <- env.get(yt_new , L)$scale
+      new_env <- env_get(yt_new , L)$envelope
+      new_scal <- env_get(yt_new , L)$scale
     }else{
-      new_env <- env.get(yt_new[ , , k] , L)$envelope
-      new_scal <- env.get(yt_new[ , , k] , L)$scale
+      new_env <- env_get(yt_new[ , , k] , L)$envelope
+      new_scal <- env_get(yt_new[ , , k] , L)$scale
     }
     g1 <- new_env
     g2 <- new_scal

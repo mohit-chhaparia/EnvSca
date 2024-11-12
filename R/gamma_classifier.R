@@ -24,9 +24,9 @@ gamma_classifier <- function(yt, group, L, yt_new){
   }
   for (k in 1:nnew){
     if(nnew == 1){
-      new_dist <- env.get(yt_new , L)$envelope
+      new_dist <- env_get(yt_new , L)$envelope
     }else{
-      new_dist <- env.get(yt_new[ , , k] , L)$envelope
+      new_dist <- env_get(yt_new[ , , k] , L)$envelope
     }
     g <- c()
     for (j in 1:nclass){

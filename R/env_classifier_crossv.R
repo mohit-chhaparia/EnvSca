@@ -26,7 +26,7 @@ env_classifier_crossv <- function(yt, group, L, kappa){
         env[[j]] <- output1$envelope
         scal[[j]] <- output1$scale
       }
-      output2 <- env.get(yt_test , L)
+      output2 <- env_get(yt_test , L)
       new_env <- output2$envelope
       new_scal <- output2$scale
       g <- c()

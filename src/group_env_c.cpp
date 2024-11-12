@@ -18,7 +18,7 @@ Rcpp::List group_env_c(const arma::cube& yt_group, int L) {
 
   for (int k = 0; k < nsub; k++) {
 
-    output = env.get(yt_group.slice(k), L);
+    output = env_get(yt_group.slice(k), L);
     arma::vec tmp_env = output["envelope"];
 
     if (k == 0) {
