@@ -15,12 +15,12 @@ LinkingTo:
     Rcpp,
     RcppArmadillo
 Imports: 
-    Rcpp
+    Rcpp,
+    astsa
 Suggests: 
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
     microbenchmark,
-    astsa,
     abind
-
+Config/testthat/edition: 3
