@@ -1,8 +1,3 @@
-//' Convert a categorical time-series into multivariate indicator process
-//'
-//' @param xt
-//' @return yt
-//' @examples
 #include <RcppArmadillo.h>
 // [[Rcpp::depends(RcppArmadillo)]]
 using namespace Rcpp;
