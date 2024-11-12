@@ -1,6 +1,5 @@
 test_that("Test 1: cat_convert works for simple input", {
   xt <- c(1, 2, 1, 3, 2, 3)
-
   expect_equal(cat_convert(xt), matrix(c(1, 0, 1, 0, 0, 0,
                                          0, 1, 0, 0, 1, 0),
                                        nrow = 6, byrow = FALSE
@@ -10,6 +9,12 @@ test_that("Test 1: cat_convert works for simple input", {
 
 test_that("Test 2: cat_convert handles single category input", {
   xt <- c(1, 1, 1, 1)
-
   expect_equal(dim(cat_convert(xt)), c(4, 0))
 })
+
+test_that("Test 3: cat_convert handles empty input", {
+  xt <- numeric(0)
+  expect_error(cat_convert(xt))
+})
+
+
