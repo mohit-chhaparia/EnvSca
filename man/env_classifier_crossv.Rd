@@ -6,6 +6,15 @@
 \usage{
 env_classifier_crossv(yt, group, L, kappa)
 }
+\arguments{
+\item{yt}{DESCRIPTION}
+
+\item{group}{DESCRIPTION}
+
+\item{L}{DESCRIPTION}
+
+\item{kappa}{DESCRIPTION}
+}
 \value{
 classes
 }

@@ -9,6 +9,14 @@ Compute
 \usage{
 group_env(yt_group, L)
 }
+\arguments{
+\item{yt_group}{DESCRIPTION}
+
+\item{L}{DESCRIPTION}
+}
+\value{
+DESCRIPTION
+}
 \description{
 Given a several time series within a group
 Compute

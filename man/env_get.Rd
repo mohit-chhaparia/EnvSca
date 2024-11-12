@@ -9,6 +9,14 @@
 \usage{
 env_get(yt, L)
 }
+\arguments{
+\item{yt}{DESCRIPTION}
+
+\item{L}{DESCRIPTION}
+}
+\value{
+DESCRIPTION
+}
 \description{
 Given a m times p-1 categorical time series, compute:
 (1) the Fourier frequencies

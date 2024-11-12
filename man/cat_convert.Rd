@@ -6,6 +6,12 @@
 \usage{
 cat_convert(xt)
 }
+\arguments{
+\item{xt}{DESCRIPTION}
+}
+\value{
+DESCRIPTION
+}
 \description{
 Convert a categorical time-series into multivariate indicator process
 }

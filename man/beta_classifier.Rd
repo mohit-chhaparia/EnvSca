@@ -6,6 +6,15 @@
 \usage{
 beta_classifier(yt, group, L, yt_new)
 }
+\arguments{
+\item{yt}{DESCRIPTION}
+
+\item{group}{DESCRIPTION}
+
+\item{L}{DESCRIPTION}
+
+\item{yt_new}{DESCRIPTION}
+}
 \value{
 classes
 }

@@ -6,6 +6,17 @@
 \usage{
 env_classifier(yt, group, L, yt_new, kappa)
 }
+\arguments{
+\item{yt}{DESCRIPTION}
+
+\item{group}{DESCRIPTION}
+
+\item{L}{DESCRIPTION}
+
+\item{yt_new}{DESCRIPTION}
+
+\item{kappa}{DESCRIPTION}
+}
 \value{
 classes
 }
