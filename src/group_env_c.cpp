@@ -1,17 +1,12 @@
-//'
-//' Given a several time series within a group
-//' Compute
-//' (1) the group level spectral envelope
-//' (2) the group level optimal scaling
-//'
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
 // [[Rcpp::depends(RcppArmadillo)]]
 using namespace Rcpp;
-Function env_get("namespace::env_get");
 
 // [[Rcpp::export]]
-Rcpp::List group_env_c(const arma::cube& yt_group, int L) {
+Rcpp::List group_env_c(const arma::cube& yt_group, const arma::vec& L) {
+
+  Function env_get("env_get");
 
   int nsub = yt_group.n_slices;
   arma::vec specenv;
