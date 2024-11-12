@@ -7,3 +7,9 @@ test_that("Test 1: cat_convert works for simple input", {
                                        )
                )
 })
+
+test_that("Test 2: cat_convert handles single category input", {
+  xt <- c(1, 1, 1, 1)
+
+  expect_equal(dim(cat_convert(xt)), c(4, 0))
+})
