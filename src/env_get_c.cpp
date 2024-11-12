@@ -1,8 +1,3 @@
-//' Given a m times p-1 categorical time series, compute:
-//' (1) the Fourier frequencies
-//' (2) the spectral envelope
-//' (3) the optimal scaling
-//'
 #include <RcppArmadillo.h>
 // [[Rcpp::depends(RcppArmadillo)]]
 using namespace Rcpp;
