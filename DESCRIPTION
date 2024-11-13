@@ -6,7 +6,7 @@ Authors@R:
     person("Zeda", "Li", role = "aut"),
     person("Scott", "Bruce", , "sabruce@tamu.edu", role = "aut"),
     person("Tian", "Cai", role = "aut"))
-Description: What the package does (one paragraph).
+Description: The package provides implementation of the algorithm presented in the paper 'Interpretable Classification of Categorical Time Series using the Spectral Envelope and Optimal Scalings' along with some plotting options. The method combines spectral envelope and optimal scalings to produce a feature-based classifier that can be used to accurately determine group membership for categorical time-series.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
