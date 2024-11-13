@@ -19,8 +19,6 @@ knitr::opts_chunk$set(
 
 [![R-CMD-check](https://github.com/mohit-chhaparia/EnvSca/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mohit-chhaparia/EnvSca/actions/workflows/R-CMD-check.yaml)
 
-![Code Coverage](man/figures/code-coverage-badge.svg)
-
 <!-- badges: end -->
 
 The R package "EnvSca" provides functions for classification of categorical time-series under the supervised learning paradigm as proposed by the authors in the below linked paper. To construct meaningful features for categorical time-series classification, the authors considered two relevant quantities: the spectral envelope and its corresponding set of optimal scalings. These quantities characterize oscillatory patterns in a categorical time-series as the largest possible power at each frequency, or spectral envelope, obtained by assigning numerical values, or scalings, to categories that optimally emphasize oscillations at each frequency. This procedure combines these two quantities to produce a feature-based classifier that can be used to accurately determine group membership for categorical time-series. For reference, see the following:
