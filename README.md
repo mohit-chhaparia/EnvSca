@@ -7,6 +7,11 @@
 
 [![R-CMD-check](https://github.com/mohit-chhaparia/EnvSca/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mohit-chhaparia/EnvSca/actions/workflows/R-CMD-check.yaml)
 
+<figure>
+<img src="man/figures/code-coverage-badge.svg" alt="Code Coverage" />
+<figcaption aria-hidden="true">Code Coverage</figcaption>
+</figure>
+
 <!-- badges: end -->
 
 The R package “EnvSca” provides functions for classification of
