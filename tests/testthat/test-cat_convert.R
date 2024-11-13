@@ -22,6 +22,16 @@ test_that("Test 4: cat_convert works with non-integer categories", {
   expect_equal(cat_convert(xt), matrix(c(1, 0, 1, 0,
                                          0, 1, 0, 0),
                                        nrow = 4, byrow = FALSE
-  )
-  )
+                                       )
+               )
 })
+
+test_that("Test 5: cat_convert handles missing values", {
+  xt <- c(1, 2, NA, 1, 3, NA)
+  expect_equal(cat_convert(xt), matrix(c(1, 0, 0, 1, 0, 0,
+                                         0, 1, 0, 0, 0, 0),
+                                       nrow = 6, byrow = FALSE
+                                       )
+               )
+})
+
