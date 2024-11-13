@@ -5,7 +5,7 @@
 #' @param group DESCRIPTION
 #' @param L DESCRIPTION
 #' @param yt_new DESCRIPTION
-#' @param kappa DESCRIPTION
+#' @param kappa Tuning parameter controls the relative importance of the spectral envelope and optimal scalings in classifying time-series.
 #' @return classes
 #' @examples
 #' To be added later
