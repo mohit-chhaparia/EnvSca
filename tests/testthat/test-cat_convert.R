@@ -48,3 +48,8 @@ test_that("Test 6: cat_convert works with xt containing different data types inc
                )
 })
 
+test_that("Test 7: cat_convert output dimensions depends on input xt.", {
+  xt <- c(1, 2, 3, 2, 1, 3, 'a', 'b', NA, 'a', 'a', NA)
+  expect_equal(dim(cat_convert(xt)), c(length(xt), length(unique(xt)) - 1))
+})
+
