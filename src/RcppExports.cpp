@@ -12,12 +12,12 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // cat_convert_c
-arma::mat cat_convert_c(const arma::vec& xt);
+arma::mat cat_convert_c(const std::vector<std::string>& xt);
 RcppExport SEXP _EnvSca_cat_convert_c(SEXP xtSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::vec& >::type xt(xtSEXP);
+    Rcpp::traits::input_parameter< const std::vector<std::string>& >::type xt(xtSEXP);
     rcpp_result_gen = Rcpp::wrap(cat_convert_c(xt));
     return rcpp_result_gen;
 END_RCPP
