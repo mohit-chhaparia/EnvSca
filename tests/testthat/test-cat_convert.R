@@ -36,3 +36,15 @@ test_that("Test 5: cat_convert handles missing values", {
                )
 })
 
+test_that("Test 6: cat_convert works with xt containing different data types including NAs.", {
+  xt <- c(1, 2, 3, 2, 1, 3, 'a', 'b', NA, 'a', 'a', NA)
+  expect_equal(cat_convert(xt), matrix(c(1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+                                         0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+                                         0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+                                         0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
+                                         0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0),
+                                       nrow = 12, byrow = FALSE
+                                       )
+               )
+})
+
