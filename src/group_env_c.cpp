@@ -10,20 +10,22 @@ Rcpp::List group_env_c(const arma::cube& yt_group, const arma::vec& L) {
 
   int nsub = yt_group.n_slices;
   arma::vec specenv;
-  double beta = 0.0;
   Rcpp::List output;
+  arma::mat beta;
 
   for (int k = 0; k < nsub; k++) {
 
     output = env_get(yt_group.slice(k), L);
     arma::vec tmp_env = output["envelope"];
+    arma::mat scale = output["scale"];
 
     if (k == 0) {
       specenv = arma::vec(tmp_env.n_elem, arma::fill::zeros);
+      beta = arma::mat(scale.n_rows, scale.n_cols, arma::fill::zeros);
     }
 
     specenv += tmp_env / static_cast<double>(nsub);
-    beta += Rcpp::as<double>(output["scale"]) / static_cast<double>(nsub);
+    beta += scale / static_cast<double>(nsub);
 
   }
 
