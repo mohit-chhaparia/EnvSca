@@ -13,11 +13,18 @@ Rcpp::List group_env_c(const arma::cube& yt_group, const arma::vec& L) {
   Rcpp::List output;
   arma::mat beta;
 
+  // Containers to store envelope and scaling values at each iteration
+  Rcpp::List envelope_ind(nsub);
+  Rcpp::List scale_ind(nsub);
+
   for (int k = 0; k < nsub; k++) {
 
     output = env_get(yt_group.slice(k), L);
     arma::vec tmp_env = output["envelope"];
     arma::mat scale = output["scale"];
+
+    envelope_ind[k] = tmp_env;
+    scale_ind[k] = scale;
 
     if (k == 0) {
       specenv = arma::vec(tmp_env.n_elem, arma::fill::zeros);
@@ -26,6 +33,14 @@ Rcpp::List group_env_c(const arma::cube& yt_group, const arma::vec& L) {
 
     specenv += tmp_env / static_cast<double>(nsub);
     beta += scale / static_cast<double>(nsub);
+    // std::cout << "scale" << std::endl;
+    // std::cout << scale << std::endl;
+    // std::cout << "beta" << std::endl;
+    // std::cout << beta << std::endl;
+    // std::cout << "tmp_env" << std::endl;
+    // std::cout << tmp_env << std::endl;
+    // std::cout << "specenv" << std::endl;
+    // std::cout << specenv << std::endl;
 
   }
 
@@ -33,6 +48,8 @@ Rcpp::List group_env_c(const arma::cube& yt_group, const arma::vec& L) {
 
   return Rcpp::List::create(Rcpp::Named("freq") = freq,
                             Rcpp::Named("envelope") = specenv,
-                            Rcpp::Named("scale") = beta);
+                            Rcpp::Named("scale") = beta,
+                            Rcpp::Named("envelope_ind") = envelope_ind,
+                            Rcpp::Named("scale_ind") = scale_ind);
 }
 
