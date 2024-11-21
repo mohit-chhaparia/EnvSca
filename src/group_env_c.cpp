@@ -33,15 +33,6 @@ Rcpp::List group_env_c(const arma::cube& yt_group, const arma::vec& L) {
 
     specenv += tmp_env / static_cast<double>(nsub);
     beta += scale / static_cast<double>(nsub);
-    // std::cout << "scale" << std::endl;
-    // std::cout << scale << std::endl;
-    // std::cout << "beta" << std::endl;
-    // std::cout << beta << std::endl;
-    // std::cout << "tmp_env" << std::endl;
-    // std::cout << tmp_env << std::endl;
-    // std::cout << "specenv" << std::endl;
-    // std::cout << specenv << std::endl;
-
   }
 
   arma::vec freq = output["freq"];
