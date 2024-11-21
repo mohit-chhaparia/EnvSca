@@ -1,11 +1,12 @@
 Package: EnvSca
 Title: Classification of Categorical Time Series
 Version: 0.0.0.9000
-Authors@R: 
-    c(person("Mohit", "Chhaparia", , "mohit_chhaparia@tamu.edu", role = c("cre", "aut")), 
+Authors@R: c(
+    person("Mohit", "Chhaparia", , "mohit_chhaparia@tamu.edu", role = c("cre", "aut")), 
     person("Zeda", "Li", role = "aut"),
     person("Scott", "Bruce", , "sabruce@tamu.edu", role = "aut"),
-    person("Tian", "Cai", role = "aut"))
+    person("Tian", "Cai", role = "aut")
+  )
 Description: The package provides implementation of the algorithm presented in the paper 'Interpretable Classification of Categorical Time Series using the Spectral Envelope and Optimal Scalings' along with some plotting options. The method combines spectral envelope and optimal scalings to produce a feature-based classifier that can be used to accurately determine group membership for categorical time-series.
 License: MIT + file LICENSE
 Encoding: UTF-8
