@@ -21,17 +21,12 @@ env_classifier <- function(yt, group, L, yt_new, kappa){
   classes <- c()
   env <- list()
   scal <- list()
-  trial_output1 <- list()
-  trial_output2 <- list()
+
   # calculate group level statistics based on training time series
   for (j in 1:nclass){
     env[[j]] <- group_env(yt[ , , group == j] , L)$envelope
     scal[[j]] <- group_env(yt[ , , group == j] , L)$scale
-    print(group)
-    trial_output1[j] <- group_env(yt[ , , group == j] , L)$envelope_ind
-    trial_output2[j] <- env[[j]]
-    trial_output3 <- group_env(yt[ , , group == j] , L)$scale_ind
-    trial_output4 <- scal[[j]]
+    envelope_ind <- group_env(yt[ , , group == j] , L)$envelope_ind
   }
   # for each of testing time series, assign a group to it
   for (k in 1:nnew){
@@ -53,10 +48,5 @@ env_classifier <- function(yt, group, L, yt_new, kappa){
     }
     classes[k] <- which(g == min(g))
   }
-  print(trial_output1) # 50 x 1 x 20
-  print(trial_output2) # 50 x 1
-  # print(trial_output3) # 50 x 3 x 20
-  # print(trial_output4) # 50 x 3
-  print(classes)
   return(classes)
 }
