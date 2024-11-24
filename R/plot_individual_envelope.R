@@ -22,7 +22,9 @@ plot_individual_envelope <- function(envelope_ind, envelope_group){
     axis.ticks = element_blank(),
     axis.text = element_text(colour = "black"),
     axis.text.y = element_text(margin = margin(0, 3, 0, 3)),
-    axis.text.x = element_text(margin = margin(-1, 0, 3, 0))
+    axis.text.x = element_text(margin = margin(-1, 0, 3, 0)),
+
+    plot.margin = margin(0, 0, 0, 0, "cm")
   )
 
 
