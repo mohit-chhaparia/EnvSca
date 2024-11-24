@@ -39,7 +39,8 @@ plot_group_envelope_scaling <- function(envelope_group, scaling_group, called_fr
 
     par(mfrow=c(1,1))
     p.env <- ggplot(data = enveldatlong, aes(x = Frequency, y = value)) +
-      geom_line(size = 1, alpha = 1, aes(group = variable, color=variable)) + hw +
+      geom_line(size = 1, alpha = 1, aes(group = variable, color=variable)) +
+      hw +
       labs(x = "Frequency", y = expression(hat(lambda))) +
       theme(legend.title = element_blank(), legend.position = "bottom") +
       xlim(c(0, 0.5))
@@ -54,9 +55,11 @@ plot_group_envelope_scaling <- function(envelope_group, scaling_group, called_fr
 
     par(mfrow=c(1,1))
     p.sca <- ggplot(scadatlong, aes(x = Frequency, y = variable, fill = value)) +
-      geom_tile() + hw +
-      scale_fill_distiller(palette = "RdBu", limits = c(-lim, lim), name = "") +
-      labs(x = "Frequency", y = expression(hat(gamma))) + xlim(c(0, 0.5))
+      geom_tile() +
+      hw +
+      scale_fill_distiller(palette = "Spectral", limits = c(-lim, lim), name = "") +
+      labs(x = "Frequency", y = expression(hat(gamma))) +
+      xlim(c(0, 0.5))
     print(p.sca)
   }
 }
