@@ -10,7 +10,7 @@
 #' @examples
 #' # To be added later
 #' @export
-env_classifier <- function(yt, group, L, yt_new, kappa){
+env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
   nnew = dim(yt_new)[3]
   if(is.na(nnew)){
     nnew <- 1
@@ -27,10 +27,12 @@ env_classifier <- function(yt, group, L, yt_new, kappa){
     output <- group_env(yt[ , , group == j] , L)
     env[[j]] <- output$envelope
     scal[[j]] <- output$scale
-    if(TRUE){
-      get_plot(output$envelope_ind, output$envelope)
+    if(plot){
+      plot_individual_envelope(output$envelope_ind, output$envelope)
     }
-
+  }
+  if(plot){
+    plot_group_envelope_scaling(env, scal)
   }
   # for each of testing time series, assign a group to it
   for (k in 1:nnew){
