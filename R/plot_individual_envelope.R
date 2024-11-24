@@ -2,7 +2,7 @@
 #' @importFrom reshape2 melt
 plot_individual_envelope <- function(envelope_ind, envelope_group){
 
-  hw <- theme_grey() + theme(
+  hw <- theme_minimal() + theme(
     plot.title = element_text(hjust = 0.5),
     plot.subtitle = element_text(hjust = 0.5),
     plot.caption = element_text(hjust = - 0.5),
