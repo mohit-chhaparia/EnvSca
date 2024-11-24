@@ -1,8 +1,9 @@
 #' @import ggplot2
 #' @importFrom reshape2 melt
+#' @importFrom abind abind
 plot_group_envelope_scaling <- function(envelope_group, scaling_group){
 
-  hw <- theme_grey() + theme(
+  hw <- theme_minimal() + theme(
     plot.title = element_text(hjust = 0.5),
     plot.subtitle = element_text(hjust = 0.5),
     plot.caption = element_text(hjust = - 0.5),
@@ -37,6 +38,20 @@ plot_group_envelope_scaling <- function(envelope_group, scaling_group){
     xlim(c(0, 0.5))
   print(p.env)
 
+  for(i in 1:length(scaling_group)){
+
+    scadat <- abind((1:nf) / (2 * nf), scaling_group[[i]])
+    colnames(scadat) <- c('Frequency', paste("Category: ", as.character(1:(dim(scadat)[2] - 1)), sep = ""))
+    scadatlong <- melt(as.data.frame(scadat), id.vars = 'Frequency')
+    lim <- round(max(abs(min(scadatlong$value)), abs(max(scadatlong$value))), 1) + 0.1
+
+    par(mfrow=c(1,1))
+    p.sca <- ggplot(scadatlong, aes(x = Frequency, y = variable, fill = value)) +
+      geom_tile() + hw +
+      scale_fill_distiller(palette = "RdBu", limits = c(-lim, lim), name = "") +
+      labs(x = "Frequency", y = expression(hat(gamma))) + xlim(c(0, 0.5))
+    print(p.sca)
+  }
 }
 
 
