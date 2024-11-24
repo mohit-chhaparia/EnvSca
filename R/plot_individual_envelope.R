@@ -1,5 +1,6 @@
 #' @import ggplot2
 #' @importFrom reshape2 melt
+#' @importFrom abind abind
 plot_individual_envelope <- function(envelope_ind, envelope_group){
 
   hw <- theme_minimal() + theme(
