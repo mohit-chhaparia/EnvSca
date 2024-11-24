@@ -24,7 +24,7 @@ env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
 
   # calculate group level statistics based on training time series
   for (j in 1:nclass){
-    output <- group_env(yt[ , , group == j] , L)
+    output <- group_env(yt[ , , group == j] , L, plot = FALSE)
     env[[j]] <- output$envelope
     scal[[j]] <- output$scale
     if(plot){
@@ -32,7 +32,7 @@ env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
     }
   }
   if(plot){
-    plot_group_envelope_scaling(env, scal)
+    plot_group_envelope_scaling(env, scal, called_from = 'env_classifier')
   }
   # for each of testing time series, assign a group to it
   for (k in 1:nnew){
