@@ -25,7 +25,7 @@ plot_individual_envelope <- function(envelope_ind, envelope_group){
 
 
   nf <- length(envelope_ind[[1]])
-  enveldat <- cbind((1:nf) / (2 * nf), do.call(cbind, envelope_ind))
+  enveldat <- abind((1:nf) / (2 * nf), abind(envelope_ind, along = 2))
   colnames(enveldat) <- c('Frequency', as.character(1:(dim(enveldat)[2] - 1)))
   enveldatlong <- melt(as.data.frame(enveldat), id.vars = 'Frequency')
 
@@ -36,7 +36,7 @@ plot_individual_envelope <- function(envelope_ind, envelope_group){
     theme(legend.title = element_blank(), legend.position = "bottom") +
     xlim(c(0, 0.5))
 
-  enveldat <- cbind((1:nf) / (2*nf), envelope_group)
+  enveldat <- abind((1:nf) / (2*nf), envelope_group)
   colnames(enveldat) <- c('Frequency', 'Group');
   p.env <- p.env + geom_line(data = enveldat, aes(x = Frequency, y = Group, color='red'), size = 1.5, alpha = 1)
   print(p.env)
