@@ -1,4 +1,5 @@
 #' @import ggplot2
+#' @importFrom reshape2 melt
 plot_group_envelope_scaling <- function(envelope_group, scaling_group){
 
   hw <- theme_grey() + theme(

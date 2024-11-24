@@ -1,4 +1,5 @@
 #' @import ggplot2
+#' @importFrom reshape2 melt
 plot_individual_envelope <- function(envelope_ind, envelope_group){
 
   hw <- theme_grey() + theme(
