@@ -1,7 +1,7 @@
 #' @import ggplot2
 #' @importFrom reshape2 melt
 #' @importFrom abind abind
-plot_group_envelope_scaling <- function(envelope_group, scaling_group){
+plot_group_envelope_scaling <- function(envelope_group, scaling_group, called_from){
 
   hw <- theme_minimal() + theme(
     plot.title = element_text(hjust = 0.5),
@@ -22,22 +22,29 @@ plot_group_envelope_scaling <- function(envelope_group, scaling_group){
     axis.ticks = element_blank(),
     axis.text = element_text(colour = "black"),
     axis.text.y = element_text(margin = margin(0, 3, 0, 3)),
-    axis.text.x = element_text(margin = margin(-1, 0, 3, 0))
+    axis.text.x = element_text(margin = margin(-1, 0, 3, 0)),
+
+    plot.margin = margin(0, 0, 0, 0, "cm")
   )
 
-  nf <- length(envelope_group[[1]])
-  enveldat <- abind((1:nf) / (2 * nf), abind(envelope_group, along = 2))
-  colnames(enveldat) <- c('Frequency', paste("Category: ", as.character(1:(dim(enveldat)[2] - 1)), sep = ""))
-  enveldatlong <- melt(as.data.frame(enveldat), id.vars = 'Frequency')
 
-  par(mfrow=c(1,1))
-  p.env <- ggplot(data = enveldatlong, aes(x = Frequency, y = value)) +
-    geom_line(size = 1, alpha = 1, aes(group = variable, color=variable)) + hw +
-    labs(x = "Frequency", y = expression(hat(lambda))) +
-    theme(legend.title = element_blank(), legend.position = "bottom") +
-    xlim(c(0, 0.5))
-  print(p.env)
 
+  if(called_from == 'group_env'){
+    nf <- length(scaling_group[[1]])
+  } else{
+    nf <- length(envelope_group[[1]])
+    enveldat <- abind((1:nf) / (2 * nf), abind(envelope_group, along = 2))
+    colnames(enveldat) <- c('Frequency', paste("Category: ", as.character(1:(dim(enveldat)[2] - 1)), sep = ""))
+    enveldatlong <- melt(as.data.frame(enveldat), id.vars = 'Frequency')
+
+    par(mfrow=c(1,1))
+    p.env <- ggplot(data = enveldatlong, aes(x = Frequency, y = value)) +
+      geom_line(size = 1, alpha = 1, aes(group = variable, color=variable)) + hw +
+      labs(x = "Frequency", y = expression(hat(lambda))) +
+      theme(legend.title = element_blank(), legend.position = "bottom") +
+      xlim(c(0, 0.5))
+    print(p.env)
+  }
   for(i in 1:length(scaling_group)){
 
     scadat <- abind((1:nf) / (2 * nf), scaling_group[[i]])
