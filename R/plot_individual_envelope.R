@@ -1,5 +1,5 @@
 #' @import ggplot2
-get_plot <- function(envelope_ind, envelope_group){
+plot_individual_envelope <- function(envelope_ind, envelope_group){
 
   hw <- theme_grey() + theme(
     plot.title = element_text(hjust = 0.5),
