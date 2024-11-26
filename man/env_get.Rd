@@ -2,20 +2,22 @@
 % Please edit documentation in R/env_get.R
 \name{env_get}
 \alias{env_get}
-\title{Given a m times p-1 categorical time series, compute:
-(1) the Fourier frequencies
-(2) the spectral envelope
-(3) the optimal scaling}
+\title{Get frequencies, spectral envelope, and optimal scaling.}
 \usage{
 env_get(yt, L)
 }
 \arguments{
-\item{yt}{DESCRIPTION}
+\item{yt}{A matrix containing univariate or multivariate time-series. Rows represent time points.}
 
-\item{L}{DESCRIPTION}
+\item{L}{Integer giving the widths of modified Daniell smoothers to be used to smooth the periodogram. Ranges from 1 to cube root of the number of rows of yt.}
 }
 \value{
-DESCRIPTION
+A list containing the following components:
+\describe{
+\item{\code{freq}}{A vector of frequencies.}
+\item{\code{envelope}}{A vector of spectral envelope values corresponding to the frequencies.}
+\item{\code{scale}}{A matrix of optimal scaling vectors corresponding to the frequencies.}
+}
 }
 \description{
 Given a m times p-1 categorical time series, compute:
@@ -24,5 +26,13 @@ Given a m times p-1 categorical time series, compute:
 (3) the optimal scaling
 }
 \examples{
-To be added later
+set.seed(12092024)
+data <- matrix(rnorm(500), ncol = 5)
+result <- env_get(data, L = 3)
+
+# Accessing results
+freq <- result$freq
+envelope <- result$envelope
+scale <- result$scale
+
 }

@@ -1,14 +1,29 @@
 #'
+#' Get frequencies, spectral envelope, and optimal scaling.
+#'
 #' Given a m times p-1 categorical time series, compute:
 #' (1) the Fourier frequencies
 #' (2) the spectral envelope
 #' (3) the optimal scaling
 #'
-#' @param yt univariate or multivariate time-series
-#' @param L Integer giving the widths of modified Daniell smoothers to be used to smooth the periodogram
-#' @return DESCRIPTION
+#' @param yt A matrix containing univariate or multivariate time-series. Rows represent time points.
+#' @param L Integer giving the widths of modified Daniell smoothers to be used to smooth the periodogram. Ranges from 1 to cube root of the number of rows of yt.
+#' @return A list containing the following components:
+#' \describe{
+#'   \item{\code{freq}}{A vector of frequencies.}
+#'   \item{\code{envelope}}{A vector of spectral envelope values corresponding to the frequencies.}
+#'   \item{\code{scale}}{A matrix of optimal scaling vectors corresponding to the frequencies.}
+#' }
 #' @examples
-#' # To be added later
+#' set.seed(12092024)
+#' data <- matrix(rnorm(500), ncol = 5)
+#' result <- env_get(data, L = 3)
+#'
+#' # Accessing results
+#' freq <- result$freq
+#' envelope <- result$envelope
+#' scale <- result$scale
+#'
 #' @export
 #' @importFrom astsa mvspec
 env_get <- function(yt,L){
