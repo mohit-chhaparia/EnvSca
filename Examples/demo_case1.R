@@ -1,5 +1,6 @@
 library(EnvSca)
 library(abind)
+
 nrep <- 5 # nrep was set at 100 in the original code
 n <- c(100, 200, 500) #length of time series
 rates_proposed <- matrix(0, nrep, length(n))
@@ -9,10 +10,12 @@ nsub <- 20 # number of time series per group in training data
 ntest <- 50
 kappa <- seq(0, 1, 0.1)
 ind <- matrix(0, nrow = nrep, ncol = length(n))
+
 ######################
 ##      Case 1      ##
 ######################
-set.seed(0928)
+
+set.seed(12092024)
 for(case in 1:length(n)){
   for(rep in 1:nrep){
     cat("repetition", rep, '\n')
@@ -26,9 +29,9 @@ for(case in 1:length(n)){
                   c(0, 1, 0.3, 1),
                   c(0, 1, 1, 0.3))
 
-    ###################################
-    #      simulate training set      #
-    ###################################
+    #####################################
+    ##      simulate training set      ##
+    #####################################
 
     # Group 1
     yt1 <- array(0, c(nobs, m - 1, nsub))
@@ -81,9 +84,9 @@ for(case in 1:length(n)){
     }
 
 
-    ###############################
-    #      simulate test set      #
-    ###############################
+    #################################
+    ##      simulate test set      ##
+    #################################
 
     # Group 1
     yt1_test <- array(0, c(nobs, m - 1, ntest))
@@ -132,9 +135,10 @@ for(case in 1:length(n)){
     }
 
 
-    ###########################################
-    #      run classification procedures      #
-    ###########################################
+    #############################################
+    ##      run classification procedures      ##
+    #############################################
+
     yt <- abind(yt1, yt2)
     yt_test <- abind(yt1_test, yt2_test)
     group <- c(rep(1, nsub), rep(2, nsub))
