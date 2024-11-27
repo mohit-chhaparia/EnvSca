@@ -11,11 +11,11 @@ group_env(yt_group, L, plot = FALSE)
 to time points.}
 
 \item{L}{A integer or vector of integers giving the widths of modified Daniell smoothers to be used
-to smooth the periodogram of each time series in the group. The value of the elements range from 1
-to cube root of the number of rows of yt_group.}
+to smooth the periodogram of each time series in the group. The value of the elements in \code{L} range from 1
+to cube root of the number of rows of \code{yt_group}.}
 
 \item{plot}{Logical; If \code{TRUE}, generates plots for individual spectral envelopes, and the
-group-level envelopes and scalings. Default is \code{FALSE}.}
+group-level scalings. Default is \code{FALSE}.}
 }
 \value{
 A list containing the following components:

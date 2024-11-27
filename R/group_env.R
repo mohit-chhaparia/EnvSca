@@ -12,10 +12,10 @@
 #' @param yt_group A 3D array where each slice represents a time-series in the group. Rows correspond
 #' to time points.
 #' @param L A integer or vector of integers giving the widths of modified Daniell smoothers to be used
-#' to smooth the periodogram of each time series in the group. The value of the elements range from 1
-#' to cube root of the number of rows of yt_group.
+#' to smooth the periodogram of each time series in the group. The value of the elements in \code{L} range from 1
+#' to cube root of the number of rows of \code{yt_group}.
 #' @param plot Logical; If \code{TRUE}, generates plots for individual spectral envelopes, and the
-#' group-level envelopes and scalings. Default is \code{FALSE}.
+#' group-level scalings. Default is \code{FALSE}.
 #' @return A list containing the following components:
 #' \describe{
 #'   \item{\code{freq}}{A vector of frequencies common across the group.}
