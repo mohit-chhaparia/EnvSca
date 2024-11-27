@@ -9,8 +9,9 @@
 #' @param group A vector of integers indicating the class/group for each time-series in \code{yt}. The
 #' length of \code{group} must match the number of slices in \code{yt}.
 #' @param L A integer or vector of integers giving the widths of modified Daniell smoothers to be
-#' used to smooth the periodogram. The value of the elements in \code{L} range from 1 to cube root of the number
-#' of rows of \code{yt}.
+#' used to smooth the periodogram. The value of the elements in \code{L} range from 2 to less than half of the
+#' number of rows of \code{yt}. It is feasible to have \code{L} less than the cube root of the number of
+#' rows in \code{yt}.
 #' @param kappa A numeric vector of candidate values between 0 and 1 for the \code{kappa} parameter that controls
 #' the relative importance of the spectral envelope and optimal scaling in the classification decision. Higher
 #' values give more weight to the spectral envelope. Each value is tested to assess its classification accuracy.
