@@ -9,7 +9,7 @@
 #' @param yt A matrix containing univariate or multivariate time-series. Rows represent time points.
 #' @param L A integer or vector of integers giving the widths of modified Daniell smoothers to be
 #' used to smooth the periodogram. The value of the elements in \code{L} range from 2 to less than half of the
-#' numbern of rows of \code{yt}. It is feasible to have \code{L} less than the cube root of the number of
+#' number of rows of \code{yt}. It is feasible to have \code{L} less than the cube root of the number of
 #' rows in \code{yt}.
 #' @return A list containing the following components:
 #' \describe{

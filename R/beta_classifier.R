@@ -9,7 +9,7 @@
 #' length of \code{group} must match the number of slices in \code{yt}.
 #' @param L A integer or vector of integers giving the widths of modified Daniell smoothers to be
 #' used to smooth the periodogram. The value of the elements in \code{L} range from 2 to less than half of the
-#' numbern of rows of \code{yt}. It is feasible to have \code{L} less than the cube root of the number of
+#' number of rows of \code{yt}. It is feasible to have \code{L} less than the cube root of the number of
 #' rows in \code{yt}.
 #' @param yt_new A matrix representing the test time series. Dimensions are the same as \code{yt}.
 #' @return A numeric vector where each element corresponds to the predicted class label for a test time-series in
