@@ -1,14 +1,34 @@
 #'
-#' This is the main function: It assigns classes to a time series
+#' Classify Time Series based on Spectral Envelope and Optimal Scaling
 #'
-#' @param yt DESCRIPTION
-#' @param group DESCRIPTION
-#' @param L DESCRIPTION
-#' @param yt_new DESCRIPTION
-#' @param kappa Tuning parameter controls the relative importance of the spectral envelope and optimal scalings in classifying time-series.
-#' @return classes
+#' This function assigns a class to each time series in a set of test time series \code{yt_new} by comparing
+#' them with training times series groups \code{yt}. Classification is based on group-level spectral
+#' envelopes and optimal scaling with a tunable parameter \code{kappa} to adjust their relative importance.
+#'
+#' @param yt A 3D array representing the training time-series.
+#' @param group A vector of integers indicating the group/class for each training time series. The length of
+#' \code{group} must be equal to the number of slices in \code{yt}.
+#' @param L A integer or vector of integers giving the widths of modified Daniell smoothers to be used
+#' to smooth the periodogram of each time series in the group. The value of the elements in \code{L} range from 1
+#' to cube root of the number of rows of \code{yt}.
+#' @param yt_new A matrix representing the test time series. The dimensions are the same as \code{yt}.
+#' @param kappa A numeric value between 0 and 1 that controls the relative importance of the spectral envelope
+#' and optimal scaling in the classification decision. Higher values give more weight to the spectral envelope.
+#' @param plot Logical; If \code{TRUE}, generates plots for individual spectral envelopes, and the
+#' group-level envelopes and scalings during training. Default is \code{TRUE}.
+#' @return A vector of predicted class labels for each time series in \code{yt_new}.
 #' @examples
-#' # To be added later
+#' set.seed(12092024)
+#' # Simulate training time series for two groups
+#' yt <- array(rnorm(1500), dim = c(50, 3, 10))
+#' group <- c(rep(1, 5), rep(2, 5))
+#'
+#' # Simulate test time series
+#' yt_new <- matrix(rnorm(150), nrow = 50)
+#'
+#' # Classify the test time series
+#' classes <- env_classifier(yt, group, L = 3, yt_new, kappa = 0.5, plot = TRUE)
+#' print(classes)
 #' @export
 env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
   nnew = dim(yt_new)[3]

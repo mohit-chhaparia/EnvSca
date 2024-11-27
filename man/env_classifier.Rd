@@ -2,27 +2,46 @@
 % Please edit documentation in R/env_classifier.R
 \name{env_classifier}
 \alias{env_classifier}
-\title{This is the main function: It assigns classes to a time series}
+\title{Classify Time Series based on Spectral Envelope and Optimal Scaling}
 \usage{
-env_classifier(yt, group, L, yt_new, kappa)
+env_classifier(yt, group, L, yt_new, kappa, plot = TRUE)
 }
 \arguments{
-\item{yt}{DESCRIPTION}
+\item{yt}{A 3D array representing the training time-series.}
 
-\item{group}{DESCRIPTION}
+\item{group}{A vector of integers indicating the group/class for each training time series. The length of
+\code{group} must be equal to the number of slices in \code{yt}.}
 
-\item{L}{DESCRIPTION}
+\item{L}{A integer or vector of integers giving the widths of modified Daniell smoothers to be used
+to smooth the periodogram of each time series in the group. The value of the elements in \code{L} range from 1
+to cube root of the number of rows of \code{yt}.}
 
-\item{yt_new}{DESCRIPTION}
+\item{yt_new}{A matrix representing the test time series. The dimensions are the same as \code{yt}.}
 
-\item{kappa}{DESCRIPTION}
+\item{kappa}{A numeric value between 0 and 1 that controls the relative importance of the spectral envelope
+and optimal scaling in the classification decision. Higher values give more weight to the spectral envelope.}
+
+\item{plot}{Logical; If \code{TRUE}, generates plots for individual spectral envelopes, and the
+group-level envelopes and scalings during training. Default is \code{TRUE}.}
 }
 \value{
-classes
+A vector of predicted class labels for each time series in \code{yt_new}.
 }
 \description{
-This is the main function: It assigns classes to a time series
+This function assigns a class to each time series in a set of test time series \code{yt_new} by comparing
+them with training times series groups \code{yt}. Classification is based on group-level spectral
+envelopes and optimal scaling with a tunable parameter \code{kappa} to adjust their relative importance.
 }
 \examples{
-To be added later
+set.seed(12092024)
+# Simulate training time series for two groups
+yt <- array(rnorm(1500), dim = c(50, 3, 10))
+group <- c(rep(1, 5), rep(2, 5))
+
+# Simulate test time series
+yt_new <- matrix(rnorm(150), nrow = 50)
+
+# Classify the test time series
+classes <- env_classifier(yt, group, L = 3, yt_new, kappa = 0.5, plot = TRUE)
+print(classes)
 }
