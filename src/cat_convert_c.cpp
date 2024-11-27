@@ -8,7 +8,6 @@ arma::mat cat_convert_c(const std::vector<std::string>& xt) {
   std::vector<std::string> stage = xt;
 
   std::sort(stage.begin(), stage.end());
-  Rcpp::Rcout << std::endl;
   stage.erase(std::unique(stage.begin(), stage.end()), stage.end());
 
   int nobs = xt.size();
