@@ -23,9 +23,25 @@
 #'
 #' @export
 cat_convert <- function(xt){
-  if(length(xt) <= 0) stop("Length of xt is zero!!")
 
-  if(any(is.na(xt)) | any(is.numeric(xt))) xt <- as.character(ifelse(is.na(xt), 'NA', xt))
+  # xt is NULL
+  if(is.null(xt)) stop("Provide a valid categorical time-series.")
+  # xt does not contain any elements
+  if(length(xt) <= 0) stop("Length of xt is zero.")
+  # xt is anything other than a vector
+  if(!is.vector(xt)) stop("xt must be a vector.")
+  # Check for supported data types
+  if(!all(is.numeric(xt) | is.character(xt) | is.factor(xt) | is.na(xt)))
+    stop("xt must be numeric, or character, or factor (with/without some NAs).")
+  # Check if all elements are NAs
+  if(all(is.na(xt))) stop("All elements of xt cannot be NAs.")
+  # Check if any elements are NAs
+  if(any(is.na(xt)))
+    warning("xt contains some missing values (NAs). These will be treated as a distinct category labeled 'NA'.")
+  # Check if data has unusually high number of unique categories.
+  if(length(unique(xt)) > 1e6) stop("xt has unusually high number of unique categories ( > 1e6).")
+
+  if(any(is.na(xt)) | any(is.numeric(xt)) | any(is.factor(xt))) xt <- as.character(ifelse(is.na(xt), 'NA', xt))
 
   return(.Call(`_EnvSca_cat_convert_c`, xt))
 }
