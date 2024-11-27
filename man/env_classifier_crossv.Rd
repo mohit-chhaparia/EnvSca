@@ -2,25 +2,49 @@
 % Please edit documentation in R/env_classifier_crossv.R
 \name{env_classifier_crossv}
 \alias{env_classifier_crossv}
-\title{Cross-validation to do grid search of kappa}
+\title{Cross-Validation for Grid Search of \code{Kappa} in Time Series Classification}
 \usage{
 env_classifier_crossv(yt, group, L, kappa)
 }
 \arguments{
-\item{yt}{DESCRIPTION}
+\item{yt}{A 3D array representing the time-series data. Each slice corresponds to one time-series.}
 
-\item{group}{DESCRIPTION}
+\item{group}{A vector of integers indicating the class/group for each time-series in \code{yt}. The
+length of \code{group} must match the number of slices in \code{yt}.}
 
-\item{L}{DESCRIPTION}
+\item{L}{A integer or vector of integers giving the widths of modified Daniell smoothers to be
+used to smooth the periodogram. The value of the elements in \code{L} range from 1 to cube root of the number
+of rows of \code{yt}.}
 
-\item{kappa}{DESCRIPTION}
+\item{kappa}{A numeric vector of candidate values between 0 and 1 for the \code{kappa} parameter that controls
+the relative importance of the spectral envelope and optimal scaling in the classification decision. Higher
+values give more weight to the spectral envelope. Each value is tested to assess its classification accuracy.}
 }
 \value{
-classes
+A numeric vector where each element corresponds to the cross-validation classification accuracy for a
+given \code{kappa} value.
 }
 \description{
-Cross-validation to do grid search of kappa
+This function performs cross-validation to evaluate the performance of the method across a range of \code{kappa}
+values. This helps in selecting the optimal value of \code{kappa}, which controls the relative importance of
+spectral envelope and optimal scaling in time-series classification.
 }
 \examples{
-To be added later
+set.seed(12092024)
+
+# Simulate time series data for two classes
+yt <- array(rnorm(1500), dim = c(50, 3, 10))
+group <- c(rep(1, 5), rep(2, 5))
+
+# Range of kappa values
+kappa_values <- seq(0, 1, length.out = 10)
+
+# Perform cross-validation
+cv_results <- env_classifier_crossv(yt, group, L = 3, kappa = kappa_values)
+print(cv_results)
+
+# Plot results
+plot(kappa_values, cv_results / 10, type = "b", xlab = "Kappa", ylab = "Accuracy",
+     main = "Cross-Validation Results")
+
 }
