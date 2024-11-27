@@ -30,7 +30,21 @@ plot_group_envelope_scaling <- function(envelope_group, scaling_group, called_fr
 
 
   if(called_from == 'group_env'){
-    nf <- length(scaling_group[[1]])
+    nf <- nrow(scaling_group)
+    scadat <- abind((1:nf) / (2 * nf), scaling_group)
+    colnames(scadat) <- c('Frequency', paste("Category: ", as.character(1:(dim(scadat)[2] - 1)), sep = ""))
+    scadatlong <- melt(as.data.frame(scadat), id.vars = 'Frequency')
+    lim <- round(max(abs(min(scadatlong$value)), abs(max(scadatlong$value))), 1) + 0.1
+
+    par(mfrow=c(1,1))
+    p.sca <- ggplot(scadatlong, aes(x = Frequency, y = variable, fill = value)) +
+      geom_tile() +
+      hw +
+      scale_fill_distiller(palette = "Spectral", limits = c(-lim, lim), name = "") +
+      labs(x = "Frequency", y = expression(hat(gamma))) +
+      xlim(c(0, 0.5))
+    print(p.sca)
+
   } else{
     nf <- length(envelope_group[[1]])
     enveldat <- abind((1:nf) / (2 * nf), abind(envelope_group, along = 2))
@@ -45,22 +59,23 @@ plot_group_envelope_scaling <- function(envelope_group, scaling_group, called_fr
       theme(legend.title = element_blank(), legend.position = "bottom") +
       xlim(c(0, 0.5))
     print(p.env)
-  }
-  for(i in 1:length(scaling_group)){
 
-    scadat <- abind((1:nf) / (2 * nf), scaling_group[[i]])
-    colnames(scadat) <- c('Frequency', paste("Category: ", as.character(1:(dim(scadat)[2] - 1)), sep = ""))
-    scadatlong <- melt(as.data.frame(scadat), id.vars = 'Frequency')
-    lim <- round(max(abs(min(scadatlong$value)), abs(max(scadatlong$value))), 1) + 0.1
+    for(i in 1:length(scaling_group)){
 
-    par(mfrow=c(1,1))
-    p.sca <- ggplot(scadatlong, aes(x = Frequency, y = variable, fill = value)) +
-      geom_tile() +
-      hw +
-      scale_fill_distiller(palette = "Spectral", limits = c(-lim, lim), name = "") +
-      labs(x = "Frequency", y = expression(hat(gamma))) +
-      xlim(c(0, 0.5))
-    print(p.sca)
+      scadat <- abind((1:nf) / (2 * nf), scaling_group[[i]])
+      colnames(scadat) <- c('Frequency', paste("Category: ", as.character(1:(dim(scadat)[2] - 1)), sep = ""))
+      scadatlong <- melt(as.data.frame(scadat), id.vars = 'Frequency')
+      lim <- round(max(abs(min(scadatlong$value)), abs(max(scadatlong$value))), 1) + 0.1
+
+      par(mfrow=c(1,1))
+      p.sca <- ggplot(scadatlong, aes(x = Frequency, y = variable, fill = value)) +
+        geom_tile() +
+        hw +
+        scale_fill_distiller(palette = "Spectral", limits = c(-lim, lim), name = "") +
+        labs(x = "Frequency", y = expression(hat(gamma))) +
+        xlim(c(0, 0.5))
+      print(p.sca)
+    }
   }
 }
 
