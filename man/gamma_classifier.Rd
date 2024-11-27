@@ -2,25 +2,42 @@
 % Please edit documentation in R/gamma_classifier.R
 \name{gamma_classifier}
 \alias{gamma_classifier}
-\title{Classification using ONLY spectral envelope}
+\title{Classification Using only Spectral Envelope}
 \usage{
 gamma_classifier(yt, group, L, yt_new)
 }
 \arguments{
-\item{yt}{DESCRIPTION}
+\item{yt}{A 3D array representing the training time-series. Each slice corresponds to one time-series.}
 
-\item{group}{DESCRIPTION}
+\item{group}{A vector of integers indicating the class/group for each time-series in \code{yt}. The
+length of \code{group} must match the number of slices in \code{yt}.}
 
-\item{L}{DESCRIPTION}
+\item{L}{A integer or vector of integers giving the widths of modified Daniell smoothers to be
+used to smooth the periodogram. The value of the elements in \code{L} range from 1 to cube root of the number
+of rows of \code{yt}.}
 
-\item{yt_new}{DESCRIPTION}
+\item{yt_new}{A matrix representing the test time series. Dimensions are the same as \code{yt}.}
 }
 \value{
-classes
+A numeric vector where each element corresponds to the predicted class label for a test time-series in
+\code{yt_new}.
 }
 \description{
-Classification using ONLY spectral envelope
+This function classifies test time-series based solely on the spectral envelope derived from the
+training time-series groups.
 }
 \examples{
-To be added later
+set.seed(12092024)
+
+# Simulate training time-series for two classes
+yt <- array(rnorm(1500), dim = c(50, 3, 10))
+group <- c(rep(1, 5), rep(2, 5))
+
+# Simulate test time-series
+yt_new <- matrix(rnorm(150), nrow = 50)
+
+# Classify the test time-series
+classes <- gamma_classifier(yt, group, L = 3, yt_new)
+print(classes)
+
 }
