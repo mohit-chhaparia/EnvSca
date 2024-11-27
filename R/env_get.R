@@ -7,7 +7,9 @@
 #' (3) the optimal scaling
 #'
 #' @param yt A matrix containing univariate or multivariate time-series. Rows represent time points.
-#' @param L A integer or vector of integers giving the widths of modified Daniell smoothers to be used to smooth the periodogram. The value of the elements range from 1 to cube root of the number of rows of yt.
+#' @param L A integer or vector of integers giving the widths of modified Daniell smoothers to be
+#' used to smooth the periodogram. The value of the elements range from 1 to cube root of the number
+#' of rows of yt.
 #' @return A list containing the following components:
 #' \describe{
 #'   \item{\code{freq}}{A vector of frequencies.}

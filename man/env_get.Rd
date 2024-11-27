@@ -9,7 +9,9 @@ env_get(yt, L)
 \arguments{
 \item{yt}{A matrix containing univariate or multivariate time-series. Rows represent time points.}
 
-\item{L}{A integer or vector of integers giving the widths of modified Daniell smoothers to be used to smooth the periodogram. The value of the elements range from 1 to cube root of the number of rows of yt.}
+\item{L}{A integer or vector of integers giving the widths of modified Daniell smoothers to be
+used to smooth the periodogram. The value of the elements range from 1 to cube root of the number
+of rows of yt.}
 }
 \value{
 A list containing the following components:
