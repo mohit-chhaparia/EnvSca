@@ -7,14 +7,27 @@
 cat_convert(xt)
 }
 \arguments{
-\item{xt}{DESCRIPTION}
+\item{xt}{A vector containing the categorical time-series. The elements of this vector can be numeric,
+character, and can contain missing values (\code{NA}). If \code{xt} contains \code{NA} then they will
+be treated as a distinct category labeled 'NA'.}
 }
 \value{
-DESCRIPTION
+A binary indicator matrix containing:
+\itemize{
+\item \code{nrow}: Equal to the length of \code{xt}
+\item \code{ncol}: Equal to the number of unique categories in \code{xt} (including 'NA') minus one.
+The excluded category, used as the reference category, is the largest value in lexicographic order.
+}
 }
 \description{
-Convert a categorical time-series into multivariate indicator process
+This function transforms a categorical time series into a binary indicator matrix. Each category in the time
+series is represented as a column in the matrix, except for one reference category which is omitted.
 }
 \examples{
-To be added later
+xt <- c(1, 2, 3, 2, 1, 3, 'a', 'b', NA, 'a', 'a', NA)
+output <- cat_convert(xt)
+print(output)
+# Note: The reference category ('b' in this case) is excluded from the columns and is
+# represented by a row containing only zeros.
+
 }
