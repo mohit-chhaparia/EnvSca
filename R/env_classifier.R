@@ -9,8 +9,9 @@
 #' @param group A vector of integers indicating the group/class for each training time series. The length of
 #' \code{group} must be equal to the number of slices in \code{yt}.
 #' @param L A integer or vector of integers giving the widths of modified Daniell smoothers to be used
-#' to smooth the periodogram of each time series in the group. The value of the elements in \code{L} range from 1
-#' to cube root of the number of rows of \code{yt}.
+#' to smooth the periodogram of each time series in the group. The value of the elements in \code{L} range
+#' from 2 to less than half of the number of rows of \code{yt}. It is feasible to have \code{L} less than
+#' the cube root of the number of rows in \code{yt}.
 #' @param yt_new A matrix representing the test time series. The dimensions are the same as \code{yt}.
 #' @param kappa A numeric value between 0 and 1 that controls the relative importance of the spectral envelope
 #' and optimal scaling in the classification decision. Higher values give more weight to the spectral envelope.
