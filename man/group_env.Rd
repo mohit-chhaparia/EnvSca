@@ -7,18 +7,23 @@
 group_env(yt_group, L, plot = FALSE)
 }
 \arguments{
-\item{yt_group}{A 3D array where each slice represents a time-series in the group. Rows correspond to time points.}
+\item{yt_group}{A 3D array where each slice represents a time-series in the group. Rows correspond
+to time points.}
 
-\item{L}{A integer or vector of integers giving the widths of modified Daniell smoothers to be used to smooth the periodogram of each time series in the group. The value of the elements range from 1 to cube root of the number of rows of yt_group.}
+\item{L}{A integer or vector of integers giving the widths of modified Daniell smoothers to be used
+to smooth the periodogram of each time series in the group. The value of the elements range from 1
+to cube root of the number of rows of yt_group.}
 
-\item{plot}{Logical; If \code{TRUE}, generates plots for individual spectral envelopes, and the group-level envelopes and scalings. Default is \code{FALSE}.}
+\item{plot}{Logical; If \code{TRUE}, generates plots for individual spectral envelopes, and the
+group-level envelopes and scalings. Default is \code{FALSE}.}
 }
 \value{
 A list containing the following components:
 \describe{
 \item{\code{freq}}{A vector of frequencies common across the group.}
 \item{\code{envelope}}{The group-level spectral envelope calculated as the average of individual envelopes.}
-\item{\code{scale}}{The group-level optimal scaling matrix, calculated as the average of individual scaling matrices.}
+\item{\code{scale}}{The group-level optimal scaling matrix, calculated as the average of individual
+scaling matrices.}
 \item{\code{envelope_ind}}{A list of spectral envelopes for each time series in the group.}
 \item{\code{scale_ind}}{A list of scaling matrices for each time series in the group.}
 }
