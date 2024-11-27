@@ -2,27 +2,45 @@
 % Please edit documentation in R/group_env.R
 \name{group_env}
 \alias{group_env}
-\title{Given a several time series within a group
-Compute
-(1) the group level spectral envelope
-(2) the group level optimal scaling}
+\title{Get group-level spectral envelope and optimal scaling}
 \usage{
-group_env(yt_group, L)
+group_env(yt_group, L, plot = FALSE)
 }
 \arguments{
-\item{yt_group}{DESCRIPTION}
+\item{yt_group}{A 3D array where each slice represents a time-series in the group. Rows correspond to time points.}
 
-\item{L}{DESCRIPTION}
+\item{L}{A integer or vector of integers giving the widths of modified Daniell smoothers to be used to smooth the periodogram of each time series in the group. The value of the elements range from 1 to cube root of the number of rows of yt_group.}
+
+\item{plot}{Logical; If \code{TRUE}, generates plots for individual spectral envelopes, and the group-level envelopes and scalings. Default is \code{FALSE}.}
 }
 \value{
-DESCRIPTION
+A list containing the following components:
+\describe{
+\item{\code{freq}}{A vector of frequencies common across the group.}
+\item{\code{envelope}}{The group-level spectral envelope calculated as the average of individual envelopes.}
+\item{\code{scale}}{The group-level optimal scaling matrix, calculated as the average of individual scaling matrices.}
+\item{\code{envelope_ind}}{A list of spectral envelopes for each time series in the group.}
+\item{\code{scale_ind}}{A list of scaling matrices for each time series in the group.}
+}
 }
 \description{
 Given a several time series within a group
 Compute
 (1) the group level spectral envelope
 (2) the group level optimal scaling
+(3) plot the individual spectral envelopes
+(4) plot the group-level spectral envelopes
+(5) plot the group-level optimal scalings
 }
 \examples{
-To be added later
+set.seed(12092024)
+data <- array(rnorm(5000), dim = c(100, 5, 10))
+result <- group_env(data, L = 3, plot = TRUE)
+
+# Accessing results
+freq <- result$freq # Frequencies
+envelope <- result$envelope # Group-Level Spectral Envelope
+scale <- result$scale # Group-Level Optimal Scaling
+individual_env <- result$envelope_ind # Individual Spectral Envelopes
+individual_scale <- result$scale_ind # Individual Scaling Matrices
 }
