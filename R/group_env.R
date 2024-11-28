@@ -39,6 +39,21 @@
 #' individual_scale <- result$scale_ind # Individual Scaling Matrices
 #' @export
 group_env <- function(yt_group, L, plot = FALSE){
+
+  # Check if yt_group is NULL
+  if(is.null(yt_group)) stop("yt_group cannot be NULL.")
+  # Check the dimensions of yt_group
+  if(!is.array(yt_group) | length(dim(yt_group)) != 3)
+    stop("yt_group should be a 3D array where each slice represents a time-series.")
+  # Check if all elements of yt_group are numeric
+  if(!all(is.numeric(yt_group))) stop("All elements of yt_group must be numeric.")
+  # Check if yt_group has valid dimensions
+  if(!all(dim(yt_group) >= c(2, 1, 1))) stop("Minimum dimension of yt_group should be (2, 1, 1).")
+  # Check if yt_group is unusually large
+  if(dim(yt_group)[2:3] > c(1e3, 1e4))
+    stop("yt_group is too large. Reduce the number of columns or slices for computational feasibility.")
+
+
   output <- .Call(`_EnvSca_group_env_c`, yt_group, L)
   if(plot){
     plot_individual_envelope(output$envelope_ind, output$envelope)
