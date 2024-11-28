@@ -50,7 +50,7 @@ group_env <- function(yt_group, L, plot = FALSE){
   # Check if yt_group has valid dimensions
   if(!all(dim(yt_group) >= c(2, 1, 1))) stop("Minimum dimension of yt_group should be (2, 1, 1).")
   # Check if yt_group is unusually large
-  if(dim(yt_group)[2:3] > c(1e3, 1e4))
+  if(dim(yt_group)[2] > 1e3 | dim(yt_group)[3] > 1e4)
     stop("yt_group is too large. Reduce the number of columns or slices for computational feasibility.")
 
   # Check if L is NULL
