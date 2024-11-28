@@ -74,12 +74,23 @@ env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
   # Check if yt_new is NULL
   if(is.null(yt_new)) stop("yt_new cannot be NULL.")
   # Check the dimensions of yt_new
-  if(!is.matrix(yt_new) | length(dim(yt)) != 2)
+  if(!is.matrix(yt_new) | length(dim(yt_new)) != 2)
     stop("yt_new should be a matrix.")
   # Check if all elements of yt_new are numeric
   if(!all(is.numeric(yt_new))) stop("All elements of yt_new must be numeric.")
   # Check if yt_new has valid dimensions
   if(dim(yt_new) != dim(yt[ , , 1])) stop("Dimension of yt_new should match the dimension of each slice of yt.")
+
+  # Check if kappa is NULL
+  if(is.null(kappa)) stop("kappa cannot be NULL.")
+  # Check if kappa is a vector
+  if(!is.vector(kappa)) stop("kappa should be a single element between 0 and 1.")
+  # Check if kappa is numeric
+  if(!is.numeric(kappa))
+    stop("kappa should be a single numeric element between 0 and 1.")
+  # Check if kappa is between 0 and 1
+  if(kappa <= 0 | kappa >= 1)
+    stop("kappa should be a single element between 0 and 1.")
 
 
 
