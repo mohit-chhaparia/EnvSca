@@ -71,6 +71,16 @@ env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
   if(!all(L <= (dim(yt)[1] ^ (1 / 3))))
     warning("It is feasible if all elements of L are integers between 2 and cube root of number of rows in yt.")
 
+  # Check if yt_new is NULL
+  if(is.null(yt_new)) stop("yt_new cannot be NULL.")
+  # Check the dimensions of yt_new
+  if(!is.matrix(yt_new) | length(dim(yt)) != 2)
+    stop("yt_new should be a matrix.")
+  # Check if all elements of yt_new are numeric
+  if(!all(is.numeric(yt_new))) stop("All elements of yt_new must be numeric.")
+  # Check if yt_new has valid dimensions
+  if(dim(yt_new) != dim(yt[ , , 1])) stop("Dimension of yt_new should match the dimension of each slice of yt.")
+
 
 
 
