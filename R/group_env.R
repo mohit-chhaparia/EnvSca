@@ -70,6 +70,11 @@ group_env <- function(yt_group, L, plot = FALSE){
   if(!all(L <= (dim(yt_group)[1] ^ (1 / 3))))
     warning("It is feasible if all elements of L are integers between 2 and cube root of number of rows in yt_group.")
 
+  # Check if plot is logical
+  if(!is.logical(plot)) stop("plot should be a single logical value.")
+  # Check if plot contains a single value
+  if(length(plot) != 1 | !is.vector(plot)) stop("plot should contain a single logical value.")
+
 
   output <- .Call(`_EnvSca_group_env_c`, yt_group, L)
   if(plot){
