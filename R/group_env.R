@@ -53,6 +53,23 @@ group_env <- function(yt_group, L, plot = FALSE){
   if(dim(yt_group)[2:3] > c(1e3, 1e4))
     stop("yt_group is too large. Reduce the number of columns or slices for computational feasibility.")
 
+  # Check if L is NULL
+  if(is.null(L)) stop("L cannot be NULL.")
+  # Check if L is a vector
+  if(!is.vector(L)) stop("L should be a single integer or a vector of integers.")
+  # Check if L is numeric
+  if(!all(is.numeric(L)))
+    stop("All elements of L should be integers between 2 and half of number of rows in yt_group.")
+  # Check if all elements of L are integers
+  if(!all(L == round(L)))
+    stop("All elements of L should be integers between 2 and half of number of rows in yt_group.")
+  # Check if all elements of L are within the required range
+  if(!all(L >= 2) | !all(L <= (dim(yt_group)[1] / 2)))
+    stop("All elements of L should be integers between 2 and half of number of rows in yt_group.")
+  # Warning to suggest optimal values for L
+  if(!all(L <= (dim(yt_group)[1] ^ (1 / 3))))
+    warning("It is feasible if all elements of L are integers between 2 and cube root of number of rows in yt_group.")
+
 
   output <- .Call(`_EnvSca_group_env_c`, yt_group, L)
   if(plot){
