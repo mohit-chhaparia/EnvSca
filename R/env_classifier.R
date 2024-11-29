@@ -19,6 +19,7 @@
 #' group-level envelopes and scalings during training. Default is \code{TRUE}.
 #' @return A vector of predicted class labels for each time series in \code{yt_new}.
 #' @examples
+#' # Example 1:
 #' set.seed(12092024)
 #' # Simulate training time series for two groups
 #' yt <- array(rnorm(1500), dim = c(50, 3, 10))
@@ -29,6 +30,32 @@
 #'
 #' # Classify the test time series
 #' classes <- env_classifier(yt, group, L = 3, yt_new, kappa = 0.5, plot = TRUE)
+#' print(classes)
+#'
+#' # Example 2:
+#' set.seed(12092024)
+#' # Simulate training time series for two groups
+#' yt <- array(rnorm(1500), dim = c(50, 3, 10))
+#' group <- c(rep(1, 5), rep(2, 5))
+#'
+#' # Simulate test time series
+#' yt_new <- array(rnorm(600), dim = c(50, 3, 4))
+#'
+#' # Classify the test time series
+#' classes <- env_classifier(yt, group, L = 3, yt_new, kappa = 0.5, plot = FALSE)
+#' print(classes)
+#'
+#' # Example 3:
+#' set.seed(12092024)
+#' # Simulate training time series for two groups
+#' yt <- array(rnorm(1500), dim = c(50, 3, 10))
+#' group <- c(rep(1, 5), rep(2, 5))
+#'
+#' # Simulate test time series
+#' yt_new <- matrix(rnorm(150), nrow = 50)
+#'
+#' # Classify the test time series
+#' classes <- env_classifier(yt, group, L = 3, yt_new, kappa = 0.5, plot = FALSE)
 #' print(classes)
 #' @export
 env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
@@ -74,12 +101,17 @@ env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
   # Check if yt_new is NULL
   if(is.null(yt_new)) stop("yt_new cannot be NULL.")
   # Check the dimensions of yt_new
-  if(!is.array(yt_new) | length(dim(yt_new)) != 3)
-    stop("yt_new should be a  array of 3 dimensions.")
+  if(!(is.array(yt_new) & length(dim(yt_new)) == 3))
+    if(!(is.matrix(yt_new) & length(dim(yt_new)) == 2))
+      stop("yt_new should be a  array of 3 dimensions or a matrix of 2 dimensions.")
   # Check if all elements of yt_new are numeric
   if(!all(is.numeric(yt_new))) stop("All elements of yt_new must be numeric.")
   # Check if yt_new has valid dimensions
-  if(any(dim(yt_new[ , , 1]) != dim(yt[ , , 1]))) stop("Dimension of each slice of yt_new should match the dimension of each slice of yt.")
+  if(is.matrix(yt_new)){
+    if(any(dim(yt_new) != dim(yt[ , , 1]))) stop("Dimension of each slice of yt_new should match the dimension of each slice of yt.")
+  } else{
+    if(any(dim(yt_new[ , , 1]) != dim(yt[ , , 1]))) stop("Dimension of each slice of yt_new should match the dimension of each slice of yt.")
+  }
 
   # Check if kappa is NULL
   if(is.null(kappa)) stop("kappa cannot be NULL.")
@@ -129,7 +161,6 @@ env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
         new_env <- env_get(yt_new[ , , 1] , L)$envelope
         new_scal <- env_get(yt_new[ , , 1] , L)$scale
       }
-
     }else{
       new_env <- env_get(yt_new[ , , k] , L)$envelope
       new_scal <- env_get(yt_new[ , , k] , L)$scale

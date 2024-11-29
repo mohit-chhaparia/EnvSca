@@ -34,6 +34,7 @@ them with training times series groups \code{yt}. Classification is based on gro
 envelopes and optimal scaling with a tunable parameter \code{kappa} to adjust their relative importance.
 }
 \examples{
+# Example 1:
 set.seed(12092024)
 # Simulate training time series for two groups
 yt <- array(rnorm(1500), dim = c(50, 3, 10))
@@ -44,5 +45,31 @@ yt_new <- array(rnorm(150), dim = c(50, 3, 1))
 
 # Classify the test time series
 classes <- env_classifier(yt, group, L = 3, yt_new, kappa = 0.5, plot = TRUE)
+print(classes)
+
+# Example 2:
+set.seed(12092024)
+# Simulate training time series for two groups
+yt <- array(rnorm(1500), dim = c(50, 3, 10))
+group <- c(rep(1, 5), rep(2, 5))
+
+# Simulate test time series
+yt_new <- array(rnorm(600), dim = c(50, 3, 4))
+
+# Classify the test time series
+classes <- env_classifier(yt, group, L = 3, yt_new, kappa = 0.5, plot = FALSE)
+print(classes)
+
+# Example 3:
+set.seed(12092024)
+# Simulate training time series for two groups
+yt <- array(rnorm(1500), dim = c(50, 3, 10))
+group <- c(rep(1, 5), rep(2, 5))
+
+# Simulate test time series
+yt_new <- matrix(rnorm(150), nrow = 50)
+
+# Classify the test time series
+classes <- env_classifier(yt, group, L = 3, yt_new, kappa = 0.5, plot = FALSE)
 print(classes)
 }
