@@ -38,6 +38,20 @@
 #'
 #' @export
 env_classifier_crossv <- function(yt, group, L, kappa){
+
+  # Check if yt is NULL
+  if(is.null(yt)) stop("yt cannot be NULL.")
+  # Check the dimensions of yt
+  if(!is.array(yt) | length(dim(yt)) != 3)
+    stop("yt should be a 3D array where each slice represents a time-series.")
+  # Check if all elements of yt are numeric
+  if(!all(is.numeric(yt))) stop("All elements of yt must be numeric.")
+  # Check if yt has valid dimensions
+  if(!all(dim(yt) >= c(2, 1, 2))) stop("Minimum dimension of yt should be (2, 1, 2).")
+  # Check if yt is unusually large
+  if(dim(yt)[2] > 1e3 | dim(yt)[3] > 1e4)
+    stop("yt is too large. Reduce the number of columns or slices for computational feasibility.")
+
   nclass <- length(unique(group))
   ntun <- length(kappa)
   classes <- rep(0 , length(kappa))
