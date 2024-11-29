@@ -11,10 +11,12 @@
 #' used to smooth the periodogram. The value of the elements in \code{L} range from 2 to less than half of the
 #' number of rows of \code{yt}. It is feasible to have \code{L} less than the cube root of the number of
 #' rows in \code{yt}.
-#' @param yt_new A matrix representing the test time series. Dimensions are the same as \code{yt}.
+#' @param yt_new A matrix or array representing the test time series. Dimensions for number of rows and columns
+#' are the same as \code{yt}.
 #' @return A numeric vector where each element corresponds to the predicted class label for a test time-series in
 #' \code{yt_new}.
 #' @examples
+#' # Example: 1
 #' set.seed(12092024)
 #'
 #' # Simulate training time-series for two classes
@@ -22,11 +24,12 @@
 #' group <- c(rep(1, 5), rep(2, 5))
 #'
 #' # Simulate test time-series
-#' yt_new <- matrix(rnorm(150), nrow = 50)
+#' yt_new <- array(rnorm(600), dim = c(50, 3, 4))
 #'
 #' # Classify the test time-series
 #' classes <- gamma_classifier(yt, group, L = 3, yt_new)
 #' print(classes)
+#'
 #'
 #' @export
 gamma_classifier <- function(yt, group, L, yt_new){
@@ -44,7 +47,11 @@ gamma_classifier <- function(yt, group, L, yt_new){
   }
   for (k in 1:nnew){
     if(nnew == 1){
-      new_dist <- env_get(yt_new , L)$envelope
+      if(is.na(dim(yt_new)[3])){
+        new_dist <- env_get(yt_new , L)$envelope
+      } else{
+        new_dist <- env_get(yt_new[ , , 1] , L)$envelope
+      }
     }else{
       new_dist <- env_get(yt_new[ , , k] , L)$envelope
     }
