@@ -15,6 +15,7 @@
 #' @return A numeric vector where each element corresponds to the predicted class label for a test time-series in
 #' \code{yt_new}.
 #' @examples
+#' # Example 1:
 #' set.seed(12092024)
 #'
 #' # Simulate training time-series for two classes
@@ -27,6 +28,8 @@
 #' # Classify the test time-series
 #' classes <- beta_classifier(yt, group, L = 3, yt_new)
 #' print(classes)
+#'
+
 #'
 #' @export
 beta_classifier <- function(yt, group, L, yt_new){
@@ -44,7 +47,11 @@ beta_classifier <- function(yt, group, L, yt_new){
   }
   for (k in 1:nnew){
     if(nnew == 1){
-      new_dist <- env_get(yt_new , L)$scale
+      if(is.na(dim(yt_new)[3])){
+        new_dist <- env_get(yt_new , L)$scale
+      } else{
+        new_dist <- env_get(yt_new[ , , 1] , L)$scale
+      }
     }else{
       new_dist <- env_get(yt_new[ , , k] , L)$scale
     }
