@@ -77,6 +77,15 @@ env_classifier_crossv <- function(yt, group, L, kappa){
   if(!all(L <= (dim(yt)[1] ^ (1 / 3))))
     warning("It is feasible if all elements of L are integers between 2 and cube root of number of rows in yt.")
 
+  # Check if kappa is NULL
+  if(is.null(kappa)) stop("kappa cannot be NULL.")
+  # Check if kappa is a vector
+  if(!is.vector(kappa)) stop("Elements of kappa should be between 0 and 1.")
+  # Check if kappa is numeric
+  if(!is.numeric(kappa)) stop("Elements of kappa should be between 0 and 1.")
+  # Check if kappa is between 0 and 1
+  if(any(kappa < 0 | kappa > 1)) stop("Elements of kappa should be between 0 and 1.")
+
 
   nclass <- length(unique(group))
   ntun <- length(kappa)
