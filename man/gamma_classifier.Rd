@@ -17,7 +17,8 @@ used to smooth the periodogram. The value of the elements in \code{L} range from
 number of rows of \code{yt}. It is feasible to have \code{L} less than the cube root of the number of
 rows in \code{yt}.}
 
-\item{yt_new}{A matrix representing the test time series. Dimensions are the same as \code{yt}.}
+\item{yt_new}{A matrix or array representing the test time series. Dimensions for number of rows and columns
+are the same as \code{yt}.}
 }
 \value{
 A numeric vector where each element corresponds to the predicted class label for a test time-series in
@@ -28,6 +29,35 @@ This function classifies test time-series based solely on the spectral envelope 
 training time-series groups.
 }
 \examples{
+# Example: 1
+set.seed(12092024)
+
+# Simulate training time-series for two classes
+yt <- array(rnorm(1500), dim = c(50, 3, 10))
+group <- c(rep(1, 5), rep(2, 5))
+
+# Simulate test time-series
+yt_new <- array(rnorm(600), dim = c(50, 3, 4))
+
+# Classify the test time-series
+classes <- gamma_classifier(yt, group, L = 3, yt_new)
+print(classes)
+
+# Example: 2
+set.seed(12092024)
+
+# Simulate training time-series for two classes
+yt <- array(rnorm(1500), dim = c(50, 3, 10))
+group <- c(rep(1, 5), rep(2, 5))
+
+# Simulate test time-series
+yt_new <- array(rnorm(150), dim = c(50, 3, 1))
+
+# Classify the test time-series
+classes <- gamma_classifier(yt, group, L = 3, yt_new)
+print(classes)
+
+# Example: 3
 set.seed(12092024)
 
 # Simulate training time-series for two classes
