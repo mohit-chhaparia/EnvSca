@@ -12,7 +12,7 @@
 #' to smooth the periodogram of each time series in the group. The value of the elements in \code{L} range
 #' from 2 to less than half of the number of rows of \code{yt}. It is feasible to have \code{L} less than
 #' the cube root of the number of rows in \code{yt}.
-#' @param yt_new A matrix representing the test time series. The dimensions are the same as \code{yt}.
+#' @param yt_new A 3D array representing the test time series. The dimensions for rows and columns are the same as \code{yt}.
 #' @param kappa A numeric value between 0 and 1 that controls the relative importance of the spectral envelope
 #' and optimal scaling in the classification decision. Higher values give more weight to the spectral envelope.
 #' @param plot Logical; If \code{TRUE}, generates plots for individual spectral envelopes, and the
@@ -49,7 +49,7 @@ env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
   # Check if group is null
   if(is.null(group)) stop("group cannot be null")
   # Check if group is numeric
-  if(!all(is.numeric)) stop("All elements of group should be numeric")
+  if(!all(is.numeric(group))) stop("All elements of group should be numeric")
   # Check dimensions of group
   if(length(group) != dim(yt)[3])
     stop("Number of elements in group should be equal to the number of slices in yt.")
@@ -74,12 +74,12 @@ env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
   # Check if yt_new is NULL
   if(is.null(yt_new)) stop("yt_new cannot be NULL.")
   # Check the dimensions of yt_new
-  if(!is.matrix(yt_new) | length(dim(yt_new)) != 2)
-    stop("yt_new should be a matrix.")
+  if(!is.array(yt_new) | length(dim(yt_new)) != 3)
+    stop("yt_new should be a  array of 3 dimensions.")
   # Check if all elements of yt_new are numeric
   if(!all(is.numeric(yt_new))) stop("All elements of yt_new must be numeric.")
   # Check if yt_new has valid dimensions
-  if(dim(yt_new) != dim(yt[ , , 1])) stop("Dimension of yt_new should match the dimension of each slice of yt.")
+  if(any(dim(yt_new[ , , 1]) != dim(yt[ , , 1]))) stop("Dimension of each slice of yt_new should match the dimension of each slice of yt.")
 
   # Check if kappa is NULL
   if(is.null(kappa)) stop("kappa cannot be NULL.")
@@ -88,7 +88,7 @@ env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
   # Check if kappa is numeric
   if(!is.numeric(kappa)) stop("kappa should be a single numeric element between 0 and 1.")
   # Check if kappa is between 0 and 1
-  if(kappa <= 0 | kappa >= 1) stop("kappa should be a single element between 0 and 1.")
+  if(kappa < 0 | kappa > 1) stop("kappa should be a single element between 0 and 1.")
 
 
 
