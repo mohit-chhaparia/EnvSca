@@ -28,6 +28,7 @@ This function classifies test time-series based solely on the optimal scaling ma
 training time-series groups.
 }
 \examples{
+# Example 1:
 set.seed(12092024)
 
 # Simulate training time-series for two classes
@@ -36,6 +37,34 @@ group <- c(rep(1, 5), rep(2, 5))
 
 # Simulate test time-series
 yt_new <- matrix(rnorm(150), nrow = 50)
+
+# Classify the test time-series
+classes <- beta_classifier(yt, group, L = 3, yt_new)
+print(classes)
+
+# Example 2:
+set.seed(12092024)
+
+# Simulate training time-series for two classes
+yt <- array(rnorm(1500), dim = c(50, 3, 10))
+group <- c(rep(1, 5), rep(2, 5))
+
+# Simulate test time-series
+yt_new <- array(rnorm(150), dim = c(50, 3, 1))
+
+# Classify the test time-series
+classes <- beta_classifier(yt, group, L = 3, yt_new)
+print(classes)
+
+# Example 3:
+set.seed(12092024)
+
+# Simulate training time-series for two classes
+yt <- array(rnorm(1500), dim = c(50, 3, 10))
+group <- c(rep(1, 5), rep(2, 5))
+
+# Simulate test time-series
+yt_new <- array(rnorm(300), dim = c(50, 3, 2))
 
 # Classify the test time-series
 classes <- beta_classifier(yt, group, L = 3, yt_new)
