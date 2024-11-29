@@ -90,7 +90,10 @@ env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
   # Check if kappa is between 0 and 1
   if(kappa < 0 | kappa > 1) stop("kappa should be a single element between 0 and 1.")
 
-
+  # Check if plot is logical
+  if(!is.logical(plot)) stop("plot should be a single logical value.")
+  # Check if plot contains a single value
+  if(length(plot) != 1 | !is.vector(plot)) stop("plot should contain a single logical value.")
 
 
   nnew = dim(yt_new)[3]
