@@ -17,7 +17,7 @@ to smooth the periodogram of each time series in the group. The value of the ele
 from 2 to less than half of the number of rows of \code{yt}. It is feasible to have \code{L} less than
 the cube root of the number of rows in \code{yt}.}
 
-\item{yt_new}{A matrix representing the test time series. The dimensions are the same as \code{yt}.}
+\item{yt_new}{A 3D array representing the test time series. The dimensions for rows and columns are the same as \code{yt}.}
 
 \item{kappa}{A numeric value between 0 and 1 that controls the relative importance of the spectral envelope
 and optimal scaling in the classification decision. Higher values give more weight to the spectral envelope.}
@@ -40,7 +40,7 @@ yt <- array(rnorm(1500), dim = c(50, 3, 10))
 group <- c(rep(1, 5), rep(2, 5))
 
 # Simulate test time series
-yt_new <- matrix(rnorm(150), nrow = 50)
+yt_new <- array(rnorm(150), dim = c(50, 3, 1))
 
 # Classify the test time series
 classes <- env_classifier(yt, group, L = 3, yt_new, kappa = 0.5, plot = TRUE)
