@@ -25,7 +25,7 @@
 #' group <- c(rep(1, 5), rep(2, 5))
 #'
 #' # Simulate test time series
-#' yt_new <- matrix(rnorm(150), nrow = 50)
+#' yt_new <- array(rnorm(150), dim = c(50, 3, 1))
 #'
 #' # Classify the test time series
 #' classes <- env_classifier(yt, group, L = 3, yt_new, kappa = 0.5, plot = TRUE)
@@ -119,8 +119,14 @@ env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
   # for each of testing time series, assign a group to it
   for (k in 1:nnew){
     if(nnew == 1){
-      new_env <- env_get(yt_new , L)$envelope
-      new_scal <- env_get(yt_new , L)$scale
+      if(is.na(dim(yt_new)[3])){
+        new_env <- env_get(yt_new , L)$envelope
+        new_scal <- env_get(yt_new , L)$scale
+      } else{
+        new_env <- env_get(yt_new[ , , 1] , L)$envelope
+        new_scal <- env_get(yt_new[ , , 1] , L)$scale
+      }
+
     }else{
       new_env <- env_get(yt_new[ , , k] , L)$envelope
       new_scal <- env_get(yt_new[ , , k] , L)$scale
