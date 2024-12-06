@@ -18,3 +18,14 @@ test_that("Test 1: env_get works for simple input", {
   expect_equal(dim(result$scale), c(2, 4))
 })
 
+test_that("Test 2: env_get handles single observation", {
+  yt <- matrix(rnorm(4), nrow = 1, ncol = 4)
+  L <- 2
+
+  result <- expect_error(env_get(yt, L))
+
+  # freq, envelope, and scale are empty or NULL
+  expect_length(result$freq, 0)
+  expect_length(result$envelope, 0)
+  expect_equal(dim(result$scale), NULL)
+})
