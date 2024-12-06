@@ -119,6 +119,8 @@ env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
   if(!is.vector(kappa)) stop("kappa should be a single element between 0 and 1.")
   # Check if kappa is numeric
   if(!is.numeric(kappa)) stop("kappa should be a single numeric element between 0 and 1.")
+  # Check the number of elements in kappa
+  if(length(kappa) != 1) stop("kappa should be a single numeric element between 0 and 1.")
   # Check if kappa is between 0 and 1
   if(kappa < 0 | kappa > 1) stop("kappa should be a single element between 0 and 1.")
 
