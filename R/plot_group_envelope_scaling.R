@@ -45,21 +45,21 @@ plot_group_envelope_scaling <- function(envelope_group, scaling_group, called_fr
       geom_tile() +
       hw +
       scale_fill_distiller(palette = "Spectral", limits = c(-lim, lim), name = "") +
-      labs(x = "Frequency", y = expression(hat(gamma))) +
+      labs(x = "Frequency", y = expression(hat(gamma)), title = 'Group-level Scaling for Given Class') +
       xlim(c(0, 0.5))
     print(p.sca)
 
   } else{
     nf <- length(envelope_group[[1]])
     enveldat <- abind((1:nf) / (2 * nf), abind(envelope_group, along = 2))
-    colnames(enveldat) <- c('Frequency', paste("Category: ", as.character(1:(dim(enveldat)[2] - 1)), sep = ""))
+    colnames(enveldat) <- c('Frequency', paste("Class: ", as.character(1:(dim(enveldat)[2] - 1)), sep = ""))
     enveldatlong <- melt(as.data.frame(enveldat), id.vars = 'Frequency')
 
     par(mfrow=c(1,1))
     p.env <- ggplot(data = enveldatlong, aes(x = Frequency, y = value)) +
       geom_line(size = 1, alpha = 1, aes(group = variable, color=variable)) +
       hw +
-      labs(x = "Frequency", y = expression(hat(lambda))) +
+      labs(x = "Frequency", y = expression(hat(lambda)), title = 'Group-level Envelope') +
       theme(legend.title = element_blank(), legend.position = "bottom") +
       xlim(c(0, 0.5))
     print(p.env)
@@ -76,7 +76,7 @@ plot_group_envelope_scaling <- function(envelope_group, scaling_group, called_fr
         geom_tile() +
         hw +
         scale_fill_distiller(palette = "Spectral", limits = c(-lim, lim), name = "") +
-        labs(x = "Frequency", y = expression(hat(gamma))) +
+        labs(x = "Frequency", y = expression(hat(gamma)), title = paste('Group-level Scaling for Class:', i)) +
         xlim(c(0, 0.5))
       print(p.sca)
     }
