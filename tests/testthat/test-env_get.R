@@ -30,3 +30,14 @@ test_that("Test 2: env_get handles single observation", {
   expect_equal(dim(result$scale), NULL)
 })
 
+test_that("Test 3: env_get works with small matrix", {
+  yt <- matrix(rnorm(15), nrow = 5, ncol = 3)
+  L <- 2
+
+  expect_warning(env_get(yt, L))
+  result <- suppressWarnings(env_get(yt, L))
+
+  expect_length(result$freq, 2)
+  expect_length(result$envelope, 2)
+  expect_equal(dim(result$scale), c(2, 3))
+})
