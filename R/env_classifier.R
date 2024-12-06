@@ -147,7 +147,7 @@ env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
     env[[j]] <- output$envelope
     scal[[j]] <- output$scale
     if(plot){
-      plot_individual_envelope(output$envelope_ind, output$envelope)
+      plot_individual_envelope(output$envelope_ind, output$envelope, paste('Individual & Group Envelope for Class:', j))
     }
   }
   if(plot){
