@@ -4,6 +4,7 @@
 #' @importFrom grDevices rgb gray
 #' @importFrom graphics par
 #' @importFrom utils globalVariables
+#' @noRd
 utils::globalVariables(c("Frequency", "value", "variable", "Group"))
 plot_individual_envelope <- function(envelope_ind, envelope_group, plot_title){
 
