@@ -74,6 +74,14 @@ gamma_classifier <- function(yt, group, L, yt_new){
   if(dim(yt)[2] > 1e3 | dim(yt)[3] > 1e4)
     stop("yt is too large. Reduce the number of columns or slices for computational feasibility.")
 
+  # Check if group is null
+  if(is.null(group)) stop("group cannot be null")
+  # Check if group is numeric
+  if(!all(is.numeric(group))) stop("All elements of group should be numeric")
+  # Check dimensions of group
+  if(length(group) != dim(yt)[3])
+    stop("Number of elements in group should be equal to the number of slices in yt.")
+
 
 
 
