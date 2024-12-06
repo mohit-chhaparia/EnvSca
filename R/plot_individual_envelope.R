@@ -1,6 +1,10 @@
 #' @import ggplot2
 #' @importFrom reshape2 melt
 #' @importFrom abind abind
+#' @importFrom grDevices rgb gray
+#' @importFrom graphics par
+#' @importFrom utils globalVariables
+utils::globalVariables(c("Frequency", "value", "variable", "Group"))
 plot_individual_envelope <- function(envelope_ind, envelope_group){
 
   hw <- theme_minimal() + theme(
