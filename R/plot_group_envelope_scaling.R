@@ -4,6 +4,7 @@
 #' @importFrom grDevices rgb gray
 #' @importFrom graphics par
 #' @importFrom utils globalVariables
+#' @noRd
 utils::globalVariables(c("Frequency", "value", "variable"))
 plot_group_envelope_scaling <- function(envelope_group, scaling_group, called_from){
 
