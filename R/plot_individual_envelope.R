@@ -5,7 +5,7 @@
 #' @importFrom graphics par
 #' @importFrom utils globalVariables
 utils::globalVariables(c("Frequency", "value", "variable", "Group"))
-plot_individual_envelope <- function(envelope_ind, envelope_group){
+plot_individual_envelope <- function(envelope_ind, envelope_group, plot_title){
 
   hw <- theme_minimal() + theme(
     plot.title = element_text(hjust = 0.5),
@@ -40,7 +40,7 @@ plot_individual_envelope <- function(envelope_ind, envelope_group){
   par(mfrow=c(1,1))
   p.env <- ggplot(data = enveldatlong, aes(x = Frequency, y = value)) +
     geom_line(size = 1, alpha = 0.3, aes(group = variable, color='red')) + hw +
-    labs(x = "Frequency", y = expression(hat(lambda))) +
+    labs(x = "Frequency", y = expression(hat(lambda)), title = plot_title) +
     theme(legend.title = element_blank(), legend.position = "bottom") +
     xlim(c(0, 0.5))
 
