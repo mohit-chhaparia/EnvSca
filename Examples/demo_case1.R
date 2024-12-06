@@ -1,7 +1,7 @@
 library(EnvSca)
 library(abind)
 
-nrep <- 5 # nrep was set at 100 in the original code
+nrep <- 2 # nrep was set at 100 in the original code
 n <- c(100, 200, 500) #length of time series
 rates_proposed <- matrix(0, nrep, length(n))
 rates_gamma <- matrix(0, nrep, length(n))
