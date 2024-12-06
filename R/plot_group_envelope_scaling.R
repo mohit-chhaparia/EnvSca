@@ -1,6 +1,10 @@
 #' @import ggplot2
 #' @importFrom reshape2 melt
 #' @importFrom abind abind
+#' @importFrom grDevices rgb gray
+#' @importFrom graphics par
+#' @importFrom utils globalVariables
+utils::globalVariables(c("Frequency", "value", "variable"))
 plot_group_envelope_scaling <- function(envelope_group, scaling_group, called_from){
 
   hw <- theme_minimal() + theme(
