@@ -82,6 +82,23 @@ gamma_classifier <- function(yt, group, L, yt_new){
   if(length(group) != dim(yt)[3])
     stop("Number of elements in group should be equal to the number of slices in yt.")
 
+  # Check if L is NULL
+  if(is.null(L)) stop("L cannot be NULL.")
+  # Check if L is a vector
+  if(!is.vector(L)) stop("L should be a single integer or a vector of integers.")
+  # Check if L is numeric
+  if(!all(is.numeric(L)))
+    stop("All elements of L should be integers between 2 and half of number of rows in yt.")
+  # Check if all elements of L are integers
+  if(!all(L == round(L)))
+    stop("All elements of L should be integers between 2 and half of number of rows in yt.")
+  # Check if all elements of L are within the required range
+  if(!all(L >= 2) | !all(L <= (dim(yt)[1] / 2)))
+    stop("All elements of L should be integers between 2 and half of number of rows in yt.")
+  # Warning to suggest optimal values for L
+  if(!all(L <= (dim(yt)[1] ^ (1 / 3))))
+    warning("It is feasible if all elements of L are integers between 2 and cube root of number of rows in yt.")
+
 
 
 
