@@ -41,15 +41,33 @@ devtools::install_github("mohit-chhaparia/EnvSca", build_vignettes=TRUE)
 # Note: No vignettes are added yet, hence please use the first line of code to install the package.
 ```
 
-## Remaining Task
+## Completed Tasks as per Project Expectations
 
-- Making sure the C++ and R integration works properly. (3 functions are
-  implemented in C++ to improve algorithm speed).
+- README.md with information on package purpose, how to install.
 
-- Completing R documentation.
+- Demo Examples are available in the Examples folder. The package has
+  been instructed to ignore this folder while compiling. Multiple
+  examples are available in the R documentation for env_classifier(),
+  beta_classifier(), and gamma_classifier() functions. One example is
+  available for all other external functions in their respective R
+  documentations.
 
-- Ensuring R-CMD check doesn’t fail.
+- The package installs without errors.
 
-- Add plotting functionality.
+- Check on build generates no errors, warnings, or notes.
 
-- Add testing functions wherever necessary.
+- R documentation is available for 7 external R functions (includes 3
+  wrapper functions for 3 C++ functions). No R documentation is
+  available for 2 internal R functions and 3 internal C++ functions.
+
+- <u>Advanced Option:</u> C++ code
+
+- <u>Advanced Option:</u> Testing directory for 2 external functions is
+  available. Multiple checks are available within each external R
+  function to ensure invalid input is not provided by the user.
+
+- <u>Advanced Options:</u> Continuous Integration
+
+- Note: The repository has some open issues as I further intend to work
+  on the package, add more functionality, and complete a CRAN
+  submission. Hence, please ignore them while grading.
