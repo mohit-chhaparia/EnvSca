@@ -79,7 +79,7 @@ group_env <- function(yt_group, L, plot = FALSE){
   output <- .Call(`_EnvSca_group_env_c`, yt_group, L)
   if(plot){
     plot_individual_envelope(output$envelope_ind, output$envelope, 'Individual & Group Envelope for Given Class')
-    plot_group_envelope_scaling(output$envelope, output$scale, called_from = 'group_env')
+    plot_group_scaling(output$scale)
   }
   return(output)
 }
