@@ -16,7 +16,7 @@
 #' @param kappa A numeric value between 0 and 1 that controls the relative importance of the spectral envelope
 #' and optimal scaling in the classification decision. Higher values give more weight to the spectral envelope.
 #' @param plot Logical; If \code{TRUE}, generates plots for individual spectral envelopes, and the
-#' group-level envelopes and scalings during training. Default is \code{TRUE}.
+#' group-level envelopes and scalings during training. Default is \code{FALSE}.
 #' @return A vector of predicted class labels for each time series in \code{yt_new}.
 #' @examples
 #' # Example 1:
@@ -58,7 +58,7 @@
 #' classes <- env_classifier(yt, group, L = 3, yt_new, kappa = 0.5, plot = FALSE)
 #' print(classes)
 #' @export
-env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
+env_classifier <- function(yt, group, L, yt_new, kappa, plot = FALSE){
 
   # Check if yt is NULL
   if(is.null(yt)) stop("yt cannot be NULL.")

@@ -4,7 +4,7 @@
 \alias{env_classifier}
 \title{Classify Time Series based on Spectral Envelope and Optimal Scaling}
 \usage{
-env_classifier(yt, group, L, yt_new, kappa, plot = TRUE)
+env_classifier(yt, group, L, yt_new, kappa, plot = FALSE)
 }
 \arguments{
 \item{yt}{A 3D array representing the training time-series.}
@@ -23,7 +23,7 @@ the cube root of the number of rows in \code{yt}.}
 and optimal scaling in the classification decision. Higher values give more weight to the spectral envelope.}
 
 \item{plot}{Logical; If \code{TRUE}, generates plots for individual spectral envelopes, and the
-group-level envelopes and scalings during training. Default is \code{TRUE}.}
+group-level envelopes and scalings during training. Default is \code{FALSE}.}
 }
 \value{
 A vector of predicted class labels for each time series in \code{yt_new}.
