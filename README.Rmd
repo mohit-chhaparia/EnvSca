@@ -34,25 +34,4 @@ You can install the development version of EnvSca from [GitHub](https://github.c
 devtools::install_github("mohit-chhaparia/EnvSca")
 # or
 devtools::install_github("mohit-chhaparia/EnvSca", build_vignettes=TRUE)
-# Note: No vignettes are added yet, hence please use the first line of code to install the package.
 ```
-
-## Completed Tasks as per Project Expectations
-
--   README.md with information on package purpose, how to install.
-
--   Demo Examples are available in the Examples folder. The package has been instructed to ignore this folder while compiling. Multiple examples are available in the R documentation for env_classifier(), beta_classifier(), and gamma_classifier() functions. One example is available for all other external functions in their respective R documentations.
-
--   The package installs without errors.
-
--   Check on build generates no errors, warnings, or notes.
-
--   R documentation is available for 7 external R functions (includes 3 wrapper functions for 3 C++ functions). No R documentation is available for 2 internal R functions and 3 internal C++ functions.
-
--   [Advanced Option:]{.underline} C++ code
-
--   [Advanced Option:]{.underline} Testing directory for 2 external functions is available. Multiple checks are available within each external R function to ensure invalid input is not provided by the user.
-
--   [Advanced Options:]{.underline} Continuous Integration
-
--   Note: The repository has some open issues as I further intend to work on the package, add more functionality, and complete a CRAN submission. Hence, please ignore them while grading.
