@@ -32,23 +32,20 @@ plot_group_scaling <- function(scaling_group){
     plot.margin = margin(0, 0, 0, 0, "cm")
   )
 
-  nf <- nrow(scaling_group[[1]])
-  for(i in 1:length(scaling_group)){
+  nf <- nrow(scaling_group)
+  scadat <- abind((1:nf) / (2 * nf), scaling_group)
+  colnames(scadat) <- c('Frequency', paste("Category: ", as.character(1:(ncol(scadat) - 1)), sep = ""))
+  scadatlong <- melt(as.data.frame(scadat), id.vars = 'Frequency')
+  lim <- round(max(abs(min(scadatlong$value)), abs(max(scadatlong$value))), 1) + 0.1
 
-    scadat <- abind((1:nf) / (2 * nf), scaling_group[[i]])
-    colnames(scadat) <- c('Frequency', paste("Category: ", as.character(1:(dim(scadat)[2] - 1)), sep = ""))
-    scadatlong <- melt(as.data.frame(scadat), id.vars = 'Frequency')
-    lim <- round(max(abs(min(scadatlong$value)), abs(max(scadatlong$value))), 1) + 0.1
-
-    par(mfrow=c(1,1))
-    p.sca <- ggplot(scadatlong, aes(x = Frequency, y = variable, fill = value)) +
-      geom_tile() +
-      hw +
-      scale_fill_distiller(palette = "Spectral", limits = c(-lim, lim), name = "") +
-      labs(x = "Frequency", y = expression(hat(gamma)), title = paste('Group-level Scaling for Class:', i)) +
-      xlim(c(0, 0.5))
-    print(p.sca)
-  }
+  par(mfrow=c(1,1))
+  p.sca <- ggplot(scadatlong, aes(x = Frequency, y = variable, fill = value)) +
+    geom_tile() +
+    hw +
+    scale_fill_distiller(palette = "Spectral", limits = c(-lim, lim), name = "") +
+    labs(x = "Frequency", y = expression(hat(gamma)), title = 'Group-level Scaling') +
+    xlim(c(0, 0.5))
+  print(p.sca)
 }
 
 
