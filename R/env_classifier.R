@@ -148,10 +148,11 @@ env_classifier <- function(yt, group, L, yt_new, kappa, plot = TRUE){
     scal[[j]] <- output$scale
     if(plot){
       plot_individual_envelope(output$envelope_ind, output$envelope, paste('Individual & Group Envelope for Class:', j))
+      plot_group_scaling(scal[[j]])
     }
   }
   if(plot){
-    plot_group_envelope_scaling(env, scal, called_from = 'env_classifier')
+    plot_group_envelope(env)
   }
   # for each of testing time series, assign a group to it
   for (k in 1:nnew){
