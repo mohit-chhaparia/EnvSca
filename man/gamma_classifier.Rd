@@ -4,7 +4,7 @@
 \alias{gamma_classifier}
 \title{Classification Using only Spectral Envelope}
 \usage{
-gamma_classifier(yt, group, L, yt_new)
+gamma_classifier(yt, group, L, yt_new, plot = FALSE)
 }
 \arguments{
 \item{yt}{A 3D array representing the training time-series. Each slice corresponds to one time-series.}
@@ -19,6 +19,8 @@ rows in \code{yt}.}
 
 \item{yt_new}{A matrix or array representing the test time series. Dimensions for number of rows and columns
 are the same as \code{yt}.}
+
+\item{plot}{Logical; If \code{TRUE}, generates plots for group spectral envelopes. Default is \code{FALSE}.}
 }
 \value{
 A numeric vector where each element corresponds to the predicted class label for a test time-series in
@@ -40,7 +42,7 @@ group <- c(rep(1, 5), rep(2, 5))
 yt_new <- array(rnorm(600), dim = c(50, 3, 4))
 
 # Classify the test time-series
-classes <- gamma_classifier(yt, group, L = 3, yt_new)
+classes <- gamma_classifier(yt, group, L = 3, yt_new, TRUE)
 print(classes)
 
 # Example: 2
@@ -54,7 +56,7 @@ group <- c(rep(1, 5), rep(2, 5))
 yt_new <- array(rnorm(150), dim = c(50, 3, 1))
 
 # Classify the test time-series
-classes <- gamma_classifier(yt, group, L = 3, yt_new)
+classes <- gamma_classifier(yt, group, L = 3, yt_new, TRUE)
 print(classes)
 
 # Example: 3
@@ -68,7 +70,7 @@ group <- c(rep(1, 5), rep(2, 5))
 yt_new <- matrix(rnorm(150), nrow = 50)
 
 # Classify the test time-series
-classes <- gamma_classifier(yt, group, L = 3, yt_new)
+classes <- gamma_classifier(yt, group, L = 3, yt_new, TRUE)
 print(classes)
 
 }

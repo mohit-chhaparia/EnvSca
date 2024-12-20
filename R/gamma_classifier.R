@@ -13,6 +13,7 @@
 #' rows in \code{yt}.
 #' @param yt_new A matrix or array representing the test time series. Dimensions for number of rows and columns
 #' are the same as \code{yt}.
+#' @param plot Logical; If \code{TRUE}, generates plots for group spectral envelopes. Default is \code{FALSE}.
 #' @return A numeric vector where each element corresponds to the predicted class label for a test time-series in
 #' \code{yt_new}.
 #' @examples
@@ -27,7 +28,7 @@
 #' yt_new <- array(rnorm(600), dim = c(50, 3, 4))
 #'
 #' # Classify the test time-series
-#' classes <- gamma_classifier(yt, group, L = 3, yt_new)
+#' classes <- gamma_classifier(yt, group, L = 3, yt_new, TRUE)
 #' print(classes)
 #'
 #' # Example: 2
@@ -41,7 +42,7 @@
 #' yt_new <- array(rnorm(150), dim = c(50, 3, 1))
 #'
 #' # Classify the test time-series
-#' classes <- gamma_classifier(yt, group, L = 3, yt_new)
+#' classes <- gamma_classifier(yt, group, L = 3, yt_new, TRUE)
 #' print(classes)
 #'
 #' # Example: 3
@@ -55,11 +56,11 @@
 #' yt_new <- matrix(rnorm(150), nrow = 50)
 #'
 #' # Classify the test time-series
-#' classes <- gamma_classifier(yt, group, L = 3, yt_new)
+#' classes <- gamma_classifier(yt, group, L = 3, yt_new, TRUE)
 #' print(classes)
 #'
 #' @export
-gamma_classifier <- function(yt, group, L, yt_new){
+gamma_classifier <- function(yt, group, L, yt_new, plot = FALSE){
 
   # Check if yt is NULL
   if(is.null(yt)) stop("yt cannot be NULL.")
@@ -114,6 +115,11 @@ gamma_classifier <- function(yt, group, L, yt_new){
     if(any(dim(yt_new[ , , 1]) != dim(yt[ , , 1]))) stop("Dimension of each slice of yt_new should match the dimension of each slice of yt.")
   }
 
+  # Check if plot is logical
+  if(!is.logical(plot)) stop("plot should be a single logical value.")
+  # Check if plot contains a single value
+  if(length(plot) != 1 | !is.vector(plot)) stop("plot should contain a single logical value.")
+
 
   nnew <- dim(yt_new)[3]
   if(is.na(nnew)){
@@ -143,6 +149,9 @@ gamma_classifier <- function(yt, group, L, yt_new){
       g[j] <- sum((new_dist - temp) ^ 2)
     }
     classes[k] <- which(g == min(g))
+  }
+  if(plot){
+    plot_group_envelope(dist)
   }
   return(classes)
 }
