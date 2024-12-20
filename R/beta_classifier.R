@@ -12,6 +12,7 @@
 #' number of rows of \code{yt}. It is feasible to have \code{L} less than the cube root of the number of
 #' rows in \code{yt}.
 #' @param yt_new A matrix representing the test time series. Dimensions are the same as \code{yt}.
+#' @param plot Logical; If \code{TRUE}, generates plots for optimal scalings. Default is \code{FALSE}.
 #' @return A numeric vector where each element corresponds to the predicted class label for a test time-series in
 #' \code{yt_new}.
 #' @examples
@@ -26,7 +27,7 @@
 #' yt_new <- matrix(rnorm(150), nrow = 50)
 #'
 #' # Classify the test time-series
-#' classes <- beta_classifier(yt, group, L = 3, yt_new)
+#' classes <- beta_classifier(yt, group, L = 3, yt_new, TRUE)
 #' print(classes)
 #'
 #' # Example 2:
@@ -40,7 +41,7 @@
 #' yt_new <- array(rnorm(150), dim = c(50, 3, 1))
 #'
 #' # Classify the test time-series
-#' classes <- beta_classifier(yt, group, L = 3, yt_new)
+#' classes <- beta_classifier(yt, group, L = 3, yt_new, TRUE)
 #' print(classes)
 #'
 #' # Example 3:
@@ -54,11 +55,11 @@
 #' yt_new <- array(rnorm(300), dim = c(50, 3, 2))
 #'
 #' # Classify the test time-series
-#' classes <- beta_classifier(yt, group, L = 3, yt_new)
+#' classes <- beta_classifier(yt, group, L = 3, yt_new, TRUE)
 #' print(classes)
 #'
 #' @export
-beta_classifier <- function(yt, group, L, yt_new){
+beta_classifier <- function(yt, group, L, yt_new, plot = FALSE){
 
   # Check if yt is NULL
   if(is.null(yt)) stop("yt cannot be NULL.")
@@ -113,6 +114,11 @@ beta_classifier <- function(yt, group, L, yt_new){
     if(any(dim(yt_new[ , , 1]) != dim(yt[ , , 1]))) stop("Dimension of each slice of yt_new should match the dimension of each slice of yt.")
   }
 
+  # Check if plot is logical
+  if(!is.logical(plot)) stop("plot should be a single logical value.")
+  # Check if plot contains a single value
+  if(length(plot) != 1 | !is.vector(plot)) stop("plot should contain a single logical value.")
+
 
   nnew <- dim(yt_new)[3]
   if(is.na(nnew)){
@@ -142,6 +148,11 @@ beta_classifier <- function(yt, group, L, yt_new){
       g[j] <- sum((new_dist - temp) ^ 2)
     }
     classes[k] <- which(g == min(g))
+  }
+  if(plot){
+    for(i in 1:length(dist)){
+      plot_group_scaling(dist[[i]])
+    }
   }
   return(classes)
 }
