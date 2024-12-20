@@ -4,7 +4,7 @@
 \alias{env_classifier_crossv}
 \title{Cross-Validation for Grid Search of \code{Kappa} in Time Series Classification}
 \usage{
-env_classifier_crossv(yt, group, L, kappa)
+env_classifier_crossv(yt, group, L, kappa, plot = TRUE)
 }
 \arguments{
 \item{yt}{A 3D array representing the time-series data. Each slice corresponds to one time-series.}
@@ -20,10 +20,13 @@ rows in \code{yt}.}
 \item{kappa}{A numeric vector of candidate values between 0 and 1 for the \code{kappa} parameter that controls
 the relative importance of the spectral envelope and optimal scaling in the classification decision. Higher
 values give more weight to the spectral envelope. Each value is tested to assess its classification accuracy.}
+
+\item{plot}{Logical; If \code{TRUE}, generates a accuracy plot for each \code{kappa} value. Default is
+\code{TRUE}.}
 }
 \value{
-A numeric vector where each element corresponds to the cross-validation classification accuracy for a
-given \code{kappa} value.
+A numeric vector where each element corresponds to the cross-validation classification accuracy (Number
+of classes classified correctly) for a given \code{kappa} value.
 }
 \description{
 This function performs cross-validation to evaluate the performance of the method across a range of \code{kappa}
@@ -41,7 +44,7 @@ group <- c(rep(1, 5), rep(2, 5))
 kappa_values <- seq(0, 1, length.out = 10)
 
 # Perform cross-validation
-cv_results <- env_classifier_crossv(yt, group, L = 3, kappa = kappa_values)
+cv_results <- env_classifier_crossv(yt, group, L = 3, kappa = kappa_values, FALSE)
 print(cv_results)
 
 # Plot results

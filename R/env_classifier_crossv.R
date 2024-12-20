@@ -15,8 +15,10 @@
 #' @param kappa A numeric vector of candidate values between 0 and 1 for the \code{kappa} parameter that controls
 #' the relative importance of the spectral envelope and optimal scaling in the classification decision. Higher
 #' values give more weight to the spectral envelope. Each value is tested to assess its classification accuracy.
-#' @return A numeric vector where each element corresponds to the cross-validation classification accuracy for a
-#' given \code{kappa} value.
+#' @param plot Logical; If \code{TRUE}, generates a accuracy plot for each \code{kappa} value. Default is
+#' \code{TRUE}.
+#' @return A numeric vector where each element corresponds to the cross-validation classification accuracy (Number
+#' of classes classified correctly) for a given \code{kappa} value.
 #'
 #' @examples
 #' set.seed(12092024)
@@ -29,7 +31,7 @@
 #' kappa_values <- seq(0, 1, length.out = 10)
 #'
 #' # Perform cross-validation
-#' cv_results <- env_classifier_crossv(yt, group, L = 3, kappa = kappa_values)
+#' cv_results <- env_classifier_crossv(yt, group, L = 3, kappa = kappa_values, FALSE)
 #' print(cv_results)
 #'
 #' # Plot results
@@ -37,7 +39,7 @@
 #'      main = "Cross-Validation Results")
 #'
 #' @export
-env_classifier_crossv <- function(yt, group, L, kappa){
+env_classifier_crossv <- function(yt, group, L, kappa, plot = TRUE){
 
   # Check if yt is NULL
   if(is.null(yt)) stop("yt cannot be NULL.")
@@ -86,6 +88,11 @@ env_classifier_crossv <- function(yt, group, L, kappa){
   # Check if kappa is between 0 and 1
   if(any(kappa < 0 | kappa > 1)) stop("Elements of kappa should be between 0 and 1.")
 
+  # Check if plot is logical
+  if(!is.logical(plot)) stop("plot should be a single logical value.")
+  # Check if plot contains a single value
+  if(length(plot) != 1 | !is.vector(plot)) stop("plot should contain a single logical value.")
+
 
   nclass <- length(unique(group))
   ntun <- length(kappa)
@@ -116,6 +123,10 @@ env_classifier_crossv <- function(yt, group, L, kappa){
       ig <- which(g == min(g))
       classes[jj] <- classes[jj] + (group_test == ig)
     }
+  }
+  if(plot){
+    plot(kappa, classes / dim(yt)[3], type = "b", xlab = "Kappa", ylab = "Accuracy",
+               main = "Cross-Validation Results")
   }
   return(classes)
 }
