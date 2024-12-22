@@ -62,3 +62,19 @@ test_that("Test 4: env_get handles univariate time series", {
   expect_equal(dim(result$scale), c(250, 1))
 })
 
+
+test_that("Test 5: env_get handles maximum feasible L", {
+  yt <- matrix(rnorm(200), nrow = 50, ncol = 4)
+  L <- floor(nrow(yt) / 2) - 1
+
+  expect_warning(env_get(yt, L))
+  result <- suppressWarnings(env_get(yt, L))
+
+  expect_type(result, "list")
+  expect_named(result, c("freq", "envelope", "scale"))
+
+  expect_length(result$freq, floor(nrow(yt) / 2))
+  expect_length(result$envelope, floor(nrow(yt) / 2))
+  expect_equal(dim(result$scale), c(floor(nrow(yt) / 2), ncol(yt)))
+})
+
