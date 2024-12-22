@@ -126,3 +126,20 @@ test_that("Test 9: env_get produces consistent results with fixed seed", {
   expect_equal(result1, result2)
 })
 
+
+test_that("Test 10: env_get handles multivariate time series", {
+  set.seed(42)
+  yt <- matrix(rnorm(1000), nrow = 100, ncol = 10)
+  L <- 5
+
+  expect_warning(env_get(yt, L))
+  result <- suppressWarnings(env_get(yt, L))
+
+  expect_type(result, "list")
+  expect_named(result, c("freq", "envelope", "scale"))
+
+  expect_length(result$freq, 50)
+  expect_length(result$envelope, 50)
+  expect_equal(dim(result$scale), c(50, 10))
+})
+
