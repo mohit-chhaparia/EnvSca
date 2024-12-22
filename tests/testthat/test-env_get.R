@@ -97,3 +97,18 @@ test_that("Test 7: env_get fails for invalid yt inputs", {
   expect_error(env_get(matrix(rnorm(2e4), nrow = 100, ncol = 1e4), 3), "yt has too many columns. Please reduce the dimensionality for computational feasibility.")
 })
 
+
+test_that("Test 8: env_get works with large matrix inputs", {
+  yt <- matrix(rnorm(1e6), nrow = 5000, ncol = 200)
+  L <- 5
+
+  result <- env_get(yt, L)
+
+  expect_type(result, "list")
+  expect_named(result, c("freq", "envelope", "scale"))
+
+  expect_length(result$freq, floor(nrow(yt) / 2))
+  expect_length(result$envelope, floor(nrow(yt) / 2))
+  expect_equal(dim(result$scale), c(floor(nrow(yt) / 2), ncol(yt)))
+})
+
