@@ -80,6 +80,7 @@ env_classifier <- function(yt, group, L, yt_new, kappa, plot = FALSE){
   # Check dimensions of group
   if(length(group) != dim(yt)[3])
     stop("Number of elements in group should be equal to the number of slices in yt.")
+  if(any(table(group) < 2)) stop("There should be atleast 2 records/instances for each unique class in group.")
 
   # Check if L is NULL
   if(is.null(L)) stop("L cannot be NULL.")
