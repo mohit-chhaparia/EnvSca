@@ -15,7 +15,7 @@ plot_individual_envelope <- function(envelope_ind, envelope_group, plot_title){
 
     strip.background = element_rect(fill = rgb(0.9, 0.95, 1),
                                     colour = gray(0.5),
-                                    size = 0.2),
+                                    linewidth = 0.2),
 
     panel.border = element_rect(fill = FALSE,
                                 colour = gray(0.7)),
@@ -40,14 +40,14 @@ plot_individual_envelope <- function(envelope_ind, envelope_group, plot_title){
 
   par(mfrow=c(1,1))
   p.env <- ggplot(data = enveldatlong, aes(x = Frequency, y = value)) +
-    geom_line(size = 1, alpha = 0.3, aes(group = variable, color='red')) + hw +
+    geom_line(linewidth = 1, alpha = 0.3, aes(group = variable, color='red')) + hw +
     labs(x = "Frequency", y = expression(hat(lambda)), title = plot_title) +
     theme(legend.title = element_blank(), legend.position = "bottom") +
     xlim(c(0, 0.5))
 
   enveldat <- abind((1:nf) / (2*nf), envelope_group)
   colnames(enveldat) <- c('Frequency', 'Group');
-  p.env <- p.env + geom_line(data = enveldat, aes(x = Frequency, y = Group, color='red'), size = 1.5, alpha = 1)
+  p.env <- p.env + geom_line(data = enveldat, aes(x = Frequency, y = Group, color='red'), linewidth = 1.5, alpha = 1)
   print(p.env)
 
 }
