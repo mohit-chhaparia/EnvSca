@@ -112,3 +112,17 @@ test_that("Test 8: env_get works with large matrix inputs", {
   expect_equal(dim(result$scale), c(floor(nrow(yt) / 2), ncol(yt)))
 })
 
+
+test_that("Test 9: env_get produces consistent results with fixed seed", {
+  set.seed(12092024)
+  yt <- matrix(rnorm(500), nrow = 50, ncol = 10)
+  L <- 3
+
+  result1 <- env_get(yt, L)
+
+  set.seed(12092024)
+  result2 <- env_get(yt, L)
+
+  expect_equal(result1, result2)
+})
+
