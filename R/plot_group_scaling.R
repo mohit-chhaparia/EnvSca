@@ -15,7 +15,7 @@ plot_group_scaling <- function(scaling_group){
 
     strip.background = element_rect(fill = rgb(0.9, 0.95, 1),
                                     colour = gray(0.5),
-                                    size = 0.2),
+                                    linewidth = 0.2),
 
     panel.border = element_rect(fill = FALSE,
                                 colour = gray(0.7)),
@@ -33,18 +33,18 @@ plot_group_scaling <- function(scaling_group){
   )
 
   nf <- nrow(scaling_group)
-  scadat <- abind((1:nf) / (2 * nf), scaling_group)
+  scadat <- abind(round((1:nf) / (2 * nf), 2), scaling_group)
   colnames(scadat) <- c('Frequency', paste("Category: ", as.character(1:(ncol(scadat) - 1)), sep = ""))
   scadatlong <- melt(as.data.frame(scadat), id.vars = 'Frequency')
   lim <- round(max(abs(min(scadatlong$value)), abs(max(scadatlong$value))), 1) + 0.1
 
   par(mfrow=c(1,1))
-  p.sca <- ggplot(scadatlong, aes(x = Frequency, y = variable, fill = value)) +
+  p.sca <- ggplot(scadatlong, mapping = aes(x = Frequency, y = variable, fill = value)) +
     geom_tile() +
     hw +
     scale_fill_distiller(palette = "Spectral", limits = c(-lim, lim), name = "") +
     labs(x = "Frequency", y = expression(hat(gamma)), title = 'Group-level Scaling') +
-    xlim(c(0, 0.5))
+    xlim(c(0.0, 0.51))
   print(p.sca)
 }
 
