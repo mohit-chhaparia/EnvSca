@@ -143,3 +143,24 @@ test_that("Test 10: env_get handles multivariate time series", {
   expect_equal(dim(result$scale), c(50, 10))
 })
 
+
+test_that("Test 11: env_get handles functional time series", {
+  set.seed(42)
+
+  time_points <- seq(0, 2 * pi, length.out = 100)
+  yt <- cbind(sin(time_points), cos(time_points), sin(2 * time_points), cos(2 * time_points))
+  yt <- yt + matrix(rnorm(400, sd = 0.1), nrow = 100, ncol = 4)
+  L <- 3
+
+  env_get(yt, L)
+  result <- env_get(yt, L)
+
+  expect_type(result, "list")
+  expect_named(result, c("freq", "envelope", "scale"))
+
+  expect_length(result$freq, 50)
+  expect_length(result$envelope, 50)
+  expect_equal(dim(result$scale), c(50, 4))
+})
+
+
