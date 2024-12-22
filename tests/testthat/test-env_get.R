@@ -88,3 +88,12 @@ test_that("Test 6: env_get fails for invalid L inputs", {
   expect_error(env_get(yt, 0), "L should be a integer between 1 and half of the number of rows in yt.")
 })
 
+
+test_that("Test 7: env_get fails for invalid yt inputs", {
+  expect_error(env_get(NULL, 3), "yt cannot be NULL")
+  expect_error(env_get(data.frame(rnorm(100)), 3), "yt must be a matrix")
+  expect_error(env_get(matrix("a", nrow = 10, ncol = 2), 3), "All elements of yt must be numeric.")
+  expect_error(env_get(matrix(rnorm(200), nrow = 1), 3), "yt must have atleast 2 rows and 1 column.")
+  expect_error(env_get(matrix(rnorm(2e4), nrow = 100, ncol = 1e4), 3), "yt has too many columns. Please reduce the dimensionality for computational feasibility.")
+})
+
