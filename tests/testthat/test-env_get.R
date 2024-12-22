@@ -78,3 +78,13 @@ test_that("Test 5: env_get handles maximum feasible L", {
   expect_equal(dim(result$scale), c(floor(nrow(yt) / 2), ncol(yt)))
 })
 
+
+test_that("Test 6: env_get fails for invalid L inputs", {
+  yt <- matrix(rnorm(100), nrow = 25, ncol = 4)
+
+  expect_error(env_get(yt, NULL), "L cannot be NULL.")
+  expect_error(env_get(yt, -1), "L should be a integer between 1 and half of the number of rows in yt.")
+  expect_error(env_get(yt, nrow(yt)), "L should be a integer between 1 and half of the number of rows in yt.")
+  expect_error(env_get(yt, 0), "L should be a integer between 1 and half of the number of rows in yt.")
+})
+
