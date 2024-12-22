@@ -15,7 +15,7 @@ plot_group_envelope <- function(envelope_group){
 
     strip.background = element_rect(fill = rgb(0.9, 0.95, 1),
                                     colour = gray(0.5),
-                                    size = 0.2),
+                                    linewidth = 0.2),
 
     panel.border = element_rect(fill = FALSE,
                                 colour = gray(0.7)),
@@ -39,7 +39,7 @@ plot_group_envelope <- function(envelope_group){
 
   par(mfrow=c(1,1))
   p.env <- ggplot(data = enveldatlong, aes(x = Frequency, y = value)) +
-    geom_line(size = 1, alpha = 1, aes(group = variable, color = variable)) +
+    geom_line(linewidth = 1, alpha = 1, aes(group = variable, color = variable)) +
     hw +
     labs(x = "Frequency", y = expression(hat(lambda)), title = 'Group-level Envelope') +
     theme(legend.title = element_blank(), legend.position = "bottom") +
