@@ -120,3 +120,30 @@ test_that("Test 15: cat_convert warns for high number of missing values", {
 })
 
 
+test_that("Test 16: cat_convert throws error for NULL input", {
+  expect_error(cat_convert(NULL), "Provide a valid categorical time-series.")
+})
+
+
+test_that("Test 17: cat_convert throws error for single-element xt with one unique value", {
+  xt <- c(1)
+  result <- cat_convert(xt)
+  expect_equal(dim(result), c(1, 0))
+})
+
+
+test_that("Test 18: cat_convert output has correct binary values (only 0s and 1s)", {
+  xt <- c('a', 'b', 'c', 'a', 'b')
+  result <- cat_convert(xt)
+  expect_true(all(result %in% c(0, 1)))
+})
+
+
+test_that("Test 19: cat_convert row sums are 0 or 1 (reference category rows sum to 0)", {
+  xt <- c('a', 'b', 'c', 'a', 'c')
+  result <- cat_convert(xt)
+  row_sums <- rowSums(result)
+  expect_true(all(row_sums %in% c(0, 1)))
+})
+
+
